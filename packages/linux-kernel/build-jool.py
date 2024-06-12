@@ -38,7 +38,7 @@ KERNEL_SRC: str = Path.cwd().as_posix() + '/linux'
 PACKAGE_NAME: str = 'jool'
 PACKAGE_VERSION: str = '4.1.11'
 PACKAGE_DIR: str = f'{PACKAGE_NAME}-{PACKAGE_VERSION}'
-SOURCES_ARCHIVE: str = 'jool-4.1.11'
+SOURCES_ARCHIVE: str = 'jool-4.1.11.tar.gz'
 SOURCES_URL: str = f'https://github.com/NICMx/Jool/releases/download/v4.1.11/jool-4.1.11.tar.gz'
 
 # download sources
