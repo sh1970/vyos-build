@@ -17,4 +17,4 @@ do
 done
 
 echo "I: Build Debian Package"
-dpkg-buildpackage -uc -us -tc -b -d
+dpkg-buildpackage -uc -us -tc -b -d -Zgzip

@@ -35,4 +35,4 @@ dch -v ${version:7} "New version to support AES-GCM-256 for MACsec" -b
 
 echo "I: Build Debian hostap Package"
 DEB_CPPFLAGS_SET="-Wno-use-after-free -Wno-deprecated-declarations" \
-    dpkg-buildpackage -us -uc -tc -b -Ppkg.wpa.nogui,noudeb
+    dpkg-buildpackage -us -uc -tc -b -Zgzip -Ppkg.wpa.nogui,noudeb

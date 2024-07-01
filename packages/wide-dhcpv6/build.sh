@@ -20,4 +20,4 @@ fi
 
 cd ${SRC}
 echo "I: Build Debian Package"
-dpkg-buildpackage -uc -us -tc -b
+dpkg-buildpackage -uc -us -tc -b -Zgzip

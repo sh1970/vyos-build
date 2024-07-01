@@ -45,6 +45,7 @@ EOF
 
 echo "I: Build Debian Kernel package"
 touch .scmversion
+export DEB_BUILD_OPTIONS="nocheck parallel=auto pkg.linux.image.compress=gzip"
 make bindeb-pkg BUILD_TOOLS=1 LOCALVERSION=${KERNEL_SUFFIX} KDEB_PKGVERSION=${KERNEL_VERSION}-1 -j $(getconf _NPROCESSORS_ONLN)
 
 cd $CWD

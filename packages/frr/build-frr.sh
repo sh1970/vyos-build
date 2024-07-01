@@ -37,4 +37,4 @@ sudo apt-get -y install libpam-dev libprotobuf-c-dev libpython3-dev:native pytho
 echo "I: Build Debian FRR Package"
 # extract "real" git commit for FRR version identifier
 dch -v "$(git describe | cut -c5-)" "VyOS build - FRR"
-dpkg-buildpackage -us -uc -tc -b -Ppkg.frr.rtrlib,pkg.frr.lua
+dpkg-buildpackage -us -uc -tc -b -Zgzip -Ppkg.frr.rtrlib,pkg.frr.lua
