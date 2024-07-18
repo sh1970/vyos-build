@@ -14,7 +14,7 @@ fi
 
 . ${KERNEL_VAR_FILE}
 
-url="https://dev.packages.vyos.net/source-mirror/QAT.L.4.24.0-00005.tar.gz"
+url="http://minio.shixunet.com/vyos/QAT.L.4.24.0-00005.tar.gz"
 
 cd ${CWD}
 
@@ -52,6 +52,9 @@ if [ -z $KERNEL_DIR ]; then
     echo "KERNEL_DIR not defined"
     exit 1
 fi
+
+echo "I: fix-redefinition-of-crypto_request_complete"
+patch -l -p1 < ../patches/qat/fix-redefinition-of-crypto_request_complete.patch
 
 echo "I: Compile Kernel module for Intel ${DRIVER_NAME} driver"
 mkdir -p \

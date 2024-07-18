@@ -1,0 +1,12 @@
+--- a/quickassist/qat/compat/qat_compat.h
++++ b/quickassist/qat/compat/qat_compat.h
+@@ -537,7 +537,8 @@
+ void kfree_sensitive(const void *p);
+ #endif
+ 
+-#if (KERNEL_VERSION(6, 3, 0) > LINUX_VERSION_CODE)
++#if (KERNEL_VERSION(6, 1, 29) > LINUX_VERSION_CODE && KERNEL_VERSION(6, 1, 0) < LINUX_VERSION_CODE ) || \
++    (KERNEL_VERSION(5, 15, 112) > LINUX_VERSION_CODE)
+ static inline void crypto_request_complete(struct crypto_async_request *req,
+ 					   int err)
+ {
