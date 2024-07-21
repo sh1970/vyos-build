@@ -13,4 +13,4 @@ cp -a ../pam_tacplus-debian debian
 rm -f debian/compat
 
 sudo mk-build-deps --install --tool "apt-get --yes --no-install-recommends"
-dpkg-buildpackage -uc -us -tc -b -d -Zgzip
+dpkg-buildpackage -uc -us -tc -b -d 

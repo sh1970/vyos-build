@@ -64,11 +64,11 @@ def call(description, architecture, pkgList, buildCmd) {
                 fi
             """
             try {
-                sh 'dpkg-buildpackage -uc -us -tc -F -Zgzip'
+                sh 'dpkg-buildpackage -uc -us -tc -F '
             } catch (e) {
                 print "Source packages build failed, ignoring - building binaries only"
                 currentBuild.result = 'SUCCESS'
-                sh 'dpkg-buildpackage -uc -us -tc -b -Zgzip'
+                sh 'dpkg-buildpackage -uc -us -tc -b '
             }
         }
     }

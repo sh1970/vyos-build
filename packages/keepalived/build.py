@@ -32,7 +32,7 @@ def build_package() -> bool:
     Returns:
         bool: build status
     """
-    build_cmd: list[str] = ['dpkg-buildpackage', '-uc', '-us', '-tc', '-b', '-Zgzip']
+    build_cmd: list[str] = ['dpkg-buildpackage', '-uc', '-us', '-tc', '-b', '']
     build_status: int = run(build_cmd).returncode
 
     if build_status:

@@ -162,7 +162,7 @@ RUN apt-get update && apt-get install -y \
 RUN eval $(opam env --root=/opt/opam --set-root) && \
     git clone https://github.com/vyos/libvyosconfig.git /tmp/libvyosconfig && \
     cd /tmp/libvyosconfig && git checkout 6c1f8a3f && \
-    dpkg-buildpackage -uc -us -tc -b -Zgzip && \
+    dpkg-buildpackage -uc -us -tc -b  && \
     dpkg -i /tmp/libvyosconfig0_*_$(dpkg-architecture -qDEB_HOST_ARCH).deb
 
 # Packages needed for open-vmdk
@@ -187,7 +187,7 @@ RUN wget https://salsa.debian.org/klausenbusk-guest/debootstrap/commit/a9a603b17
     cd /tmp/debootstrap && git checkout 1.0.114 && \
     patch -p1 < /tmp/a9a603b17cadbf52cb98cde0843dc9f23a08b0da.patch && \
     dch -n "Applying fix for docker image compile" && \
-    dpkg-buildpackage -us -uc -Zgzip && \
+    dpkg-buildpackage -us -uc  && \
     sudo dpkg -i ../debootstrap*.deb
 
 # Packages needed for Linux Kernel
@@ -321,7 +321,7 @@ RUN apt-get update && apt-get install -y \
 # Packages needed for OWAMP/TWAMP (service sla)
 RUN git clone -b 4.4.6 https://github.com/perfsonar/i2util.git /tmp/i2util && \
       cd /tmp/i2util && \
-      dpkg-buildpackage -uc -us -tc -b -Zgzip && \
+      dpkg-buildpackage -uc -us -tc -b  && \
       dpkg -i /tmp/*i2util*_$(dpkg-architecture -qDEB_HOST_ARCH).deb
 
 # Creating image for embedded systems needs this utilities to prepare a image file

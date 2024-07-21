@@ -46,4 +46,4 @@ dch -v "${version:1}+vyos0" "Patchset for miscellaneous fixes"
 dch -a "Forward port to upstream version ${version:1}"
 
 echo "I: Build Debian Package"
-dpkg-buildpackage -uc -us -tc -b -Zgzip
+dpkg-buildpackage -uc -us -tc -b 

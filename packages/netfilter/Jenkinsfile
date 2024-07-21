@@ -24,7 +24,7 @@ def pkgList = [
     ['name': 'pkg-libnftnl',
      'scmCommit': 'debian/1.2.6-2',
      'scmUrl': 'https://salsa.debian.org/pkg-netfilter-team/pkg-libnftnl.git',
-     'buildCmd': 'sudo mk-build-deps --install --tool "apt-get --yes --no-install-recommends"; dpkg-buildpackage -uc -us -tc -b -Zgzip'],
+     'buildCmd': 'sudo mk-build-deps --install --tool "apt-get --yes --no-install-recommends"; dpkg-buildpackage -uc -us -tc -b '],
 
     // nftables
     ['name': 'pkg-nftables',
