@@ -14,7 +14,7 @@ fi
 
 . ${KERNEL_VAR_FILE}
 
-url="https://sourceforge.net/projects/e1000/files/ixgbevf%20stable/4.18.9/ixgbevf-4.18.9.tar.gz"
+url="http://minio.shixunet.com/vyos/ixgbevf-4.18.9.tar.gz"
 
 cd ${CWD}
 
