@@ -5,7 +5,7 @@ scm_url = "https://github.com/aws/amazon-cloudwatch-agent"
 
 build_cmd = """
 
-make prepackage package-deb
+make clean test check_secrets amazon-cloudwatch-agent-linux package-deb
 ARCH=$(dpkg --print-architecture)
 TAG=$(git describe --tags --abbrev=0)
 COMMIT=$(git rev-parse --short HEAD)
