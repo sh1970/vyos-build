@@ -33,6 +33,11 @@ test-no-interfaces: checkiso
 test-interfaces: checkiso
 	scripts/check-qemu-install --debug --configd --match="interfaces_" --smoketest --uefi build/live-image-amd64.hybrid.iso
 
+.PHONY: test-vpp
+.ONESHELL:
+test-vpp: checkiso
+	scripts/check-qemu-install --debug --configd --match="vpp" --smoketest --uefi build/live-image-amd64.hybrid.iso
+
 .PHONY: testc
 .ONESHELL:
 testc: checkiso
