@@ -1,7 +1,1 @@
-ethtool/
-*.buildinfo
-*.build
-*.changes
-*.deb
-*.dsc
-
+/ethtool/

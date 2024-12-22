@@ -1,7 +1,1 @@
-humps/
-*.buildinfo
-*.build
-*.changes
-*.deb
-*.dsc
-
+/humps/

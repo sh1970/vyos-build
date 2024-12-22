@@ -1,7 +1,1 @@
-podman/
-*.buildinfo
-*.build
-*.changes
-*.deb
-*.dsc
-
+/podman/

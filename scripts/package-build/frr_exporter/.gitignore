@@ -1,6 +1,1 @@
-frr_exporter    /
-*.buildinfo
-*.build
-*.changes
-*.deb
-*.dsc
+/frr_exporter/

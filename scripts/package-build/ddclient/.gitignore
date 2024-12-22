@@ -1,7 +1,1 @@
-ddclient/
-*.buildinfo
-*.build
-*.changes
-*.deb
-*.dsc
-
+/ddclient/

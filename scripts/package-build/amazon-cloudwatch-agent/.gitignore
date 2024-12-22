@@ -1,7 +1,1 @@
-amazon-cloudwatch-agent/
-*.buildinfo
-*.build
-*.changes
-*.deb
-*.dsc
-*.tar.gz
+/amazon-cloudwatch-agent/
