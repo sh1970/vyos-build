@@ -58,7 +58,6 @@ def apply_patches(repo_dir: Path, patch_dir: Path) -> None:
             series.write(patch.name + '\n')
             print(f"I: Applied patch: {patch.name}")
 
-
 def prepare_package(repo_dir: Path, install_data: str) -> None:
     """Prepare a package"""
     if not install_data:
@@ -95,7 +94,7 @@ def build_package(package: list, patch_dir: Path) -> None:
 
         # Apply patches if any
         if (repo_dir / 'patches'):
-            apply_patches(repo_dir, patch_dir)
+            apply_patches(repo_dir, patch_dir / repo_name)
 
         # Sanitize the commit ID and build a tarball for the package
         commit_id_sanitized = package['commit_id'].replace('/', '_')
