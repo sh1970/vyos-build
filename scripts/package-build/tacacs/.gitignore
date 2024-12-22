@@ -1,9 +1,3 @@
-libnss-tacplus/
-libpam-tacplus/
-libtacplus-map/
-*.buildinfo
-*.build
-*.changes
-*.deb
-*.dsc
-*.tar.gz
+/libnss-tacplus/
+/libpam-tacplus/
+/libtacplus-map/

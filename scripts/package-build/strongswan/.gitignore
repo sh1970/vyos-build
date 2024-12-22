@@ -1,7 +1,1 @@
-strongswan/
-*.buildinfo
-*.build
-*.changes
-*.deb
-*.dsc
-*.tar.gz
+/strongswan/

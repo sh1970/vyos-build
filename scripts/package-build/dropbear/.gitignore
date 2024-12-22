@@ -1,7 +1,1 @@
-dropbear/
-*.buildinfo
-*.build
-*.changes
-*.deb
-*.dsc
-*.tar.gz
+/dropbear/

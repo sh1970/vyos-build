@@ -1,8 +1,1 @@
-aws-gwlbtun*/
-*.tar.gz
-*.tar.xz
-*.deb
-*.dsc
-*.buildinfo
-*.build
-*.changes
+/aws-gwlbtun*/

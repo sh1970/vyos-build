@@ -1,6 +1,1 @@
-telegraf/
-*.buildinfo
-*.build
-*.changes
-*.deb
-*.dsc
+/telegraf/

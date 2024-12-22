@@ -1,7 +1,1 @@
-host-sflow/
-*.buildinfo
-*.build
-*.changes
-*.deb
-*.dsc
-*.tar.gz
+/host-sflow/
