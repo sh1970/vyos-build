@@ -3,348 +3,439 @@
   data = '''
 VyOS END USER LICENSE AGREEMENT
 
-PLEASE READ THIS END USER LICENSE AGREEMENT (EULA, THIS ‘AGREEMENT’) CAREFULLY BEFORE USING VYOS FROM US.
-BY USING VYOS, YOU (“YOU”, “LICENSEE”, “CUSTOMER”) SIGNIFY YOUR ASSENT TO AND ACCEPTANCE OF THIS
-END USER LICENSE AGREEMENT AND ACKNOWLEDGE YOU HAVE READ AND UNDERSTAND THE TERMS.
-THIS AGREEMENT IS ENFORCEABLE AGAINST ANY PERSON OR ENTITY THAT USES THE SOFTWARE AND ANY PERSON OR ENTITY
-(E.G., SYSTEMS INTEGRATOR, CONSULTANT OR CONTRACTOR) THAT USES THE SOFTWARE ON ANOTHER PERSON’S OR ENTITY’S BEHALF.
-IF YOU DO NOT ACCEPT THE TERMS OF THIS AGREEMENT, THEN YOU MUST NOT USE THE SOFTWARE.
-THE EFFECTIVE DATE OF THIS AGREEMENT IS THE EARLIEST OF THE START DATE OF SERVICES STATED IN OUR INVOICE,
-PREVIOUS ACCEPTANCE OF THIS AGREEMENT (OR OUR BUSINESS PARTNER’S ORDER OR/AND INVOICE,
-PREVIOUS ACCEPTANCE OF THIS AGREEMENT) OR THE DATE THAT CUSTOMER HAS ACCESS AND IS ABLE TO USE OUR PRODUCTS OR SERVICES.
-THIS END USER LICENSE AGREEMENT DOES NOT COVER ANY SERVICES FROM US, OR THROUGH OUR BUSINESS PARTNER,
-OTHER THAN ACCESS TO THE SOFTWARE, SUCH AS TECHNICAL SUPPORT, UPGRADES OR SUPPORT SERVICES.
-PLEASE REVIEW YOUR SERVICES OR SUBSCRIPTION AGREEMENT(S) THAT YOU MAY HAVE WITH US
-OR OTHER AUTHORIZED VYOS SERVICES PROVIDER OR BUSINESS PARTNER REGARDING THE SOFTWARE AND SERVICES AND ASSOCIATED PAYMENTS.
+PLEASE READ THIS END USER LICENSE AGREEMENT (EULA, THIS ‘AGREEMENT') CAREFULLY
+BEFORE USING VYOS FROM US. BY USING VYOS, YOU ("YOU", "LICENSEE", "CUSTOMER")
+SIGNIFY YOUR ASSENT TO AND ACCEPTANCE OF THIS END USER LICENSE AGREEMENT AND
+ACKNOWLEDGE YOU HAVE READ AND UNDERSTAND THE TERMS. THIS AGREEMENT IS
+ENFORCEABLE AGAINST ANY PERSON OR ENTITY THAT USES THE SOFTWARE AND ANY PERSON
+OR ENTITY (E.G., SYSTEMS INTEGRATOR, CONSULTANT OR CONTRACTOR) THAT USES THE
+SOFTWARE ON ANOTHER PERSON'S OR ENTITY'S BEHALF. IF YOU DO NOT ACCEPT THE TERMS
+OF THIS AGREEMENT, THEN YOU MUST NOT USE THE SOFTWARE. THE EFFECTIVE DATE OF
+THIS AGREEMENT IS THE EARLIEST OF THE START DATE OF SERVICES STATED IN OUR
+INVOICE, PREVIOUS ACCEPTANCE OF THIS AGREEMENT (OR OUR BUSINESS PARTNER'S ORDER
+OR/AND INVOICE, PREVIOUS ACCEPTANCE OF THIS AGREEMENT) OR THE DATE THAT
+CUSTOMER HAS ACCESS AND IS ABLE TO USE OUR PRODUCTS OR SERVICES. THIS END USER
+LICENSE AGREEMENT DOES NOT COVER ANY SERVICES FROM US, OR THROUGH OUR BUSINESS
+PARTNER, OTHER THAN ACCESS TO THE SOFTWARE, SUCH AS TECHNICAL SUPPORT, UPGRADES
+OR SUPPORT SERVICES. PLEASE REVIEW YOUR SERVICES OR SUBSCRIPTION AGREEMENT(S)
+THAT YOU MAY HAVE WITH US OR OTHER AUTHORIZED VYOS SERVICES PROVIDER OR
+BUSINESS PARTNER REGARDING THE SOFTWARE AND SERVICES AND ASSOCIATED PAYMENTS.
 
 1. Definitions
 
-1.1 “We, Our, Us” means VyOS Contracting Entity  defined in Section 13.
+1.1 "We, Our, Us" means VyOS Contracting Entity  defined in Section 13.
 
-1.2 “VyOS” or “Software” means VyOS software provided by Us
-(or authorized services provider or  business partner)
-and consisting of VyOS software application
-(exclusively or along with any third-party software included therein or therewith)
-that includes or refers to this Agreement and any related documentation
-(including, without limitation, user and technical documentation,
-further explanatory written materials related to the Software, etc.),
-services (including, without limitation, SaaS, internet-based service, etc.),
-tool, application, component, object code, source code,
-appearance (including, without limitation, images, designs, fonts, etc.),
-structure as well as any modification and update thereof, regardless of the delivery mechanism.
+1.2 "VyOS" or "Software" means VyOS software provided by Us (or authorized
+services provider or  business partner) and consisting of VyOS software
+application (exclusively or along with any third-party software included
+therein or therewith) that includes or refers to this Agreement and any related
+documentation (including, without limitation, user and technical documentation,
+further explanatory written materials related to the Software, etc.), services
+(including, without limitation, SaaS, internet-based service, etc.), tool,
+application, component, object code, source code, appearance (including,
+without limitation, images, designs, fonts, etc.), structure as well as any
+modification
+and update thereof, regardless of the delivery mechanism.
 
-“Services” means software support services and any other services provided by Us,
-or through Our Business Partner, on a subscription basis.
+"Services" means software support services and any other services provided by
+Us, or through Our Business Partner, on a subscription basis.
 
-1.3 “Authorized Users” means employees or individual contractors to whom,
-pursuant to this Agreement, the Licensee has granted a right
-to access and use the Software with your credentials,
-provided that such access shall be for your sole benefit and in full compliance with this EULA.
+1.3 "Authorized Users" means employees or individual contractors to whom,
+pursuant to this Agreement, the Licensee has granted a right to access and use
+the Software with your credentials, provided that such access shall be for your
+sole benefit and in full compliance with this EULA.
+
 All Authorized Users are bound by the terms of this Agreement.
 
-1.4 “Cloud Provider” means authorized hosting partner’s cloud marketplace platform,
-a company that delivers cloud computing based services,
-resources and solutions to businesses and/or offers solutions via the cloud marketplace.
+1.4 "Cloud Provider" means authorized hosting partner's cloud marketplace
+platform, a company that delivers cloud computing based services, resources and
+solutions to businesses and/or offers solutions via the cloud marketplace.
 
-1.5 “Business Partner” shall mean Our authorized sales agent, partner,
-Cloud Provider reseller or distributor
-of the Software and Our Services authorized to sell Software and Services via our subscriptions.
+1.5 "Business Partner" shall mean Our authorized sales agent, partner, Cloud
+Provider reseller or distributor of the Software and Our Services authorized to
+sell Software and Services via our subscriptions. Purchases through or by a
+Business Partner. In instances where Customer purchases through a Business
+Partner, final prices and terms and conditions of sale will be as agreed
+between Customer and the Business Partner from which Customer makes such
+purchases; however, the terms set forth in this EULA are applicable to
+Customer's use and the performance of VyOS. Customer acknowledges that:
+(a) We may share information with the Business Partner related to Customer's
+    use and consumption of VyOS, and vice versa, for account management and
+    billing purposes;
+(b) the termination provisions below will also apply if Customer's Business
+    Partner fails to pay Us applicable fees; and
+(c) Business Partner is not authorized to make any changes to this EULA or
+    otherwise authorized to make any warranties, representations, promises or
+    commitments on Our behalf or in any way concerning the VyOS.
 
-Purchases through or by a Business Partner.
-In instances where Customer purchases through a Business Partner,
-final prices and terms and conditions of sale will be as agreed between Customer and the Business Partner
-from which Customer makes such purchases; however, the terms set forth
-in this EULA are applicable to Customer’s use and the performance of VyOS.
-Customer acknowledges that:
-(a) We  may share information with the Business Partner related to Customer’s use and consumption of VyOS,
-and vice versa, for account management and billing purposes;
-(b) the termination provisions below will also apply if Customer’s Business Partner fails to pay Us applicable fees; and
-(c) Business Partner is not authorized to make any changes to this EULA or otherwise authorized to make any warranties,
-representations, promises or commitments on Our behalf or in any way concerning the VyOS.
+"Business Partner's order" means the ordering document(s), issued during Your
+purchasing process by Our Business Partner in a way and manner as defined by
+Our Business Partner. Business Partner's order may describe specific Software
+and Services, Subscription(s), associated fees, payment terms, and shall be
+subject to the terms of this Agreement  and EULA.
 
-"Business Partner’s order" means the ordering document(s),
-issued during Your purchasing process by Our Business Partner
-in a way and manner as defined by Our Business Partner.
-Business Partner’s order may describe specific Software and Services,
-Subscription(s), associated fees, payment terms,
-and shall be subject to the terms of this Agreement  and EULA.
-
-1.6 “Customer”, “You”, “Licensee”, “Your” - user of VyOS and its heirs, agents, successors, assigns and
-- for the purpose of Global subscription - its Affiliates.
+1.6 "Customer", "You", "Licensee", "Your" - user of VyOS and its heirs, agents,
+successors, assigns and - for the purpose of Global subscription - its
+Affiliates.
 
 2. License Grant
 
-Subject to the following terms, We grant to You a perpetual, worldwide license to the Software
-(most of which includes multiple software components) pursuant to different open sourced and public licenses.
-The license agreement for each software component is located in the software component's source code and permits you to
-run, copy, modify, and redistribute the software component (subject to certain obligations in some cases),
-both in source code and binary code forms, with the exception of the images identified in Section 4 below.
-You shall either agree to the terms of each applicable public license or You must not install/use those components
-or exercise such licensed rights.
-This EULA pertains solely to the Software and does not limit your rights under, or grant you rights that supersede,
-the license terms of any particular component.
+Subject to the following terms, We grant to You a perpetual, worldwide license
+to the Software (most of which includes multiple software components) pursuant
+to different open sourced and public licenses. The license agreement for each
+software component is located in the software component's source code and
+permits you to run, copy, modify, and redistribute the software component
+(subject to certain obligations in some cases), both in source code and binary
+code forms, with the exception of the images identified in Section 4 below. You
+shall either agree to the terms of each applicable public license or You must
+not install/use those components or exercise such licensed rights.
 
-2.1 Limited Modifications. For the avoidance of doubt, Licensee is permitted to use VyOS from Us
-in accordance with VyOS terms and conditions and on the specific quotation,
-purchase order and/or the subscription or customized agreements, if any.
-Any other modifications of VyOS terms and conditions won’t be allowed,
-except as expressly authorized through a separate custom agreement,
+This EULA pertains solely to the Software and does not limit your rights under,
+or grant you rights that supersede, the license terms of any particular
+component.
+
+2.1 Limited Modifications. For the avoidance of doubt, Licensee is permitted to
+use VyOS from Us in accordance with VyOS terms and conditions and on the
+specific quotation, purchase order and/or the subscription or customized
+agreements, if any. Any other modifications of VyOS terms and conditions won't
+be allowed, except as expressly authorized through a separate custom agreement,
 unless otherwise defined by this Agreement, specific quotation, purchase order
 and/or the subscription or customized agreements.
 
-2.2 No Unbundling. Nonetheless, the Software is designed and provided to Licensee solely as permitted herein.
-Licensee shall not unbundle or repackage the Software for distribution, transfer or other disposition,
-unless otherwise specified by this Agreement.
+2.2 No Unbundling. Nonetheless, the Software is designed and provided to
+Licensee solely as permitted herein. Licensee shall not unbundle or repackage
+the Software for distribution, transfer or other disposition, unless otherwise
+specified by this Agreement.
 
 3. Prohibited Use and Allowed Use
 
-3.1 Except as expressly authorized through a separate custom agreement, Licensee and the Authorized Users are prohibited from:
+3.1 Except as expressly authorized through a separate custom agreement,
+Licensee and the Authorized Users are prohibited from:
 (a) using the Software on behalf of third parties;
-(b) sublicensing, licensing, renting, leasing, lending or granting other rights in the Software
-    including rights on a membership or subscription basis;
-(c) providing use of the Software in a service bureau arrangement, outsourcing or on a time sharing basis;
-(d) interfere with or disrupt the Software or systems used to provide the VyOS or other equipment or networks connected;
-(e) circumvent or disclose the user authentication or security of the Software or any host, network,
-    or account related thereto or attempt to gain unauthorized access;
+(b) sublicensing, licensing, renting, leasing, lending or granting other rights
+    in the Software including rights on a membership or subscription basis;
+(c) providing use of the Software in a service bureau arrangement, outsourcing
+    or on a time sharing basis;
+(d) interfere with or disrupt the Software or systems used to provide the VyOS
+    or other equipment or networks connected;
+(e) circumvent or disclose the user authentication or security of the Software
+    or any host, network, or account related thereto or attempt to gain
+    unauthorized access;
 (f) store or transmit SPAM or malicious code;
 (g) duplicate the Software or publish the Software for others to copy;
 (h) infringe the intellectual property rights of any entity or person; or
-(i) make any use of the Software that violates any applicable local,
-    state, national, international or foreign law or regulation.
-For more information about how to obtain a custom agreement, please contact us at: sales@vyos.io.
+(i) make any use of the Software that violates any applicable local, state,
+    national, international or foreign law or regulation.
+
+For more information about how to obtain a custom agreement, please contact us
+at: sales@vyos.io.
 
 3.2 The following uses of the Software shall be allowed:
-(a) any lab setup within the Licensee or on an Authorized User's personal device,
-    for the purpose of learning, testing, or debugging company network configs, and
-(b) any use in Authorized User's personal home networks, including but not limited to Internet access,
-    corporate VPN access, learning and experimentation.
+(a) any lab setup within the Licensee or on an Authorized User's personal
+    device, for the purpose of learning, testing, or debugging company network
+    configs, and
+(b) any use in Authorized User's personal home networks, including but not
+    limited to Internet access, corporate VPN access, learning and
+    experimentation.
 
-4. Intellectual Property Rights 
+4. Intellectual Property Rights
 
-The Software and each of their components are owned by Us and other licensors and are protected under copyright law
-and other laws as applicable. Title to the Software and any component and systems,
-or to any copy or modification shall remain with Us and other licensors, subject to the applicable license.
-The “VyOS” mark, the individual Software marks, and the “VyOS” logo are trademarks or registered trademarks
-in the EU, US and other countries.
-Artwork files that feature the VyOS logo, including but not limited to boot splash images and user interface elements,
-are Our property, distributed on the "all rights reserved" basis.
-You cannot redistribute those files separately or as part of Software without an express permission from the copyright holder.
-By accepting this Agreement You commit not to register or request registration of any commercial name,
-domain name, email, trademark, symbol or distinctive; sign, with similar characteristics, color,
-typography, style or appearance or that includes the word “VyOS” or/and VyOS logo.
+The Software and each of their components are owned by Us and other licensors
+and are protected under copyright law and other laws as applicable. Title to
+the Software and any component and systems, or to any copy or modification
+shall remain with Us and other licensors, subject to the applicable license.
+The "VyOS" mark, the individual Software marks, and the "VyOS" logo are
+trademarks or registered trademarks in the EU, US and other countries. Artwork
+files that feature the VyOS logo, including but not limited to boot splash
+images and user interface elements, are Our property, distributed on the "all
+rights reserved" basis. You cannot redistribute those files separately or as
+part of Software without an express permission from the copyright holder. By
+accepting this Agreement You commit not to register or request registration of
+any commercial name, domain name, email, trademark, symbol or distinctive;
+sign, with similar characteristics, color, typography, style or appearance or
+that includes the word "VyOS" or/and VyOS logo.
 
 This EULA does not permit you to distribute the Software using VyOS trademarks,
-regardless of whether the Software has been modified. You may make a commercial redistribution of the Software only if
-(a) permitted under a separate written agreement with Us authorizing such commercial redistribution or
+regardless of whether the Software has been modified. You may make a commercial
+redistribution of the Software only if
+(a) permitted under a separate written agreement with Us authorizing such
+    commercial redistribution or
 (b) you remove and replace all Our occurrences and VyOS trademarks and logos.
-Modifications to the software may corrupt the Software. 
 
-4.1 The Licensee grants Us a right to use its logos and trademarks
-for the purpose of displaying their Licensee status on the VyOS website,
-and for the purposes specified in VyOS Subscription Agreement.
-We will not claim that the Licensee endorses VyOS and will not publicize any details of Licensee’s VyOS usage,
-network setup, or any other information not explicitly provided by the Licensee for public release.
+Modifications to the software may corrupt the Software.
 
-4.1.1 The Licensee can revoke Our right to use Licensee’s trademarks and logos at any time,
-unless otherwise agreed in VyOS Subscription Agreement, or Our Quotation.
+4.1 The Licensee grants Us a right to use its logos and trademarks for the
+purpose of displaying their Licensee status on the VyOS website, and for the
+purposes specified in VyOS Subscription Agreement. We will not claim that the
+Licensee endorses VyOS and will not publicize any details of Licensee's VyOS
+usage, network setup, or any other information not explicitly provided by the
+Licensee for public release.
 
-5. Updates 
+4.1.1 The Licensee can revoke Our right to use Licensee's trademarks and logos
+at any time, unless otherwise agreed in VyOS Subscription Agreement, or Our
+Quotation.
 
-Along with all software update subscriptions, We provide security updates, hot-fixes and security advisory notifications
-before public disclosure (hereinafter collectively referred to as the “Updates”).
-You expressly acknowledge and agree that We have no obligation to make available and/or provide any Updates.
-All upgrades and Updates are provided by Us or through Our Business Partners to Licensee at Our sole discretion
-and are subject to the terms of this Agreement on a license exchange basis.
-Any obligations that We may have to support previous versions during the license term may end upon the availability of this update.
-Upgrades and Updates may be licensed to Licensee by Us with additional or different terms.
+5. Updates
+
+Along with all software update subscriptions, We provide security updates,
+hot-fixes and security advisory notifications before public disclosure
+(herein after collectively referred to as the "Updates"). You expressly
+acknowledge and agree that We have no obligation to make available and/or
+provide any Updates. All upgrades and Updates are provided by Us or through
+Our Business Partners to Licensee at Our sole discretion and are subject to
+the terms of this Agreement on a license exchange basis. Any obligations that
+We may have to support previous versions during the license term may end upon
+the availability of this update. Upgrades and Updates may be licensed to
+Licensee by Us with additional or different terms.
 
 6. Support
 
-This agreement does not automatically entitle the Licensee to any support for the Software provided by Us
-or through Our Business Partners unless otherwise specified in the subscription terms.
-For the avoidance of doubt, We have no liability and provide no support for any hardware or any cloud marketplace services
-provided by any Business Partner or Cloud Provider.
-Where available, maintenance and support may be purchased separately subject
-to a separate VyOS’s support services included subscriptions.
+This agreement does not automatically entitle the Licensee to any support for
+the Software provided by Us or through Our Business Partners unless otherwise
+specified in the subscription terms. For the avoidance of doubt, We have no
+liability and provide no support for any hardware or any cloud marketplace
+services provided by any Business Partner or Cloud Provider. Where available,
+maintenance and support may be purchased separately subject to a separate
+VyOS's support services included subscriptions.
 
-Support for software built from source code by a party other than Us,
-with or without modifications made by the Licensee or a third party,
-is provided only through separate agreements.
+Support for software built from source code by a party other than Us, with or
+without modifications made by the Licensee or a third party, is provided only
+through separate agreements.
 
-For more information about how to obtain a VyOS’s software and support services included subscriptions,
-please contact us at: sales@vyos.io.
+For more information about how to obtain a VyOS's software and support services
+included subscriptions, please contact us at: sales@vyos.io.
 
-7. Term and Termination 
+7. Term and Termination.
 
-7. Term and Termination.  This Agreement begins on the Effective Date and shall remain in effect until terminated due to
-(a) Licensee fails to pay the fees amounts associated to Our subscriptions when due or otherwise materially breaches this Agreement,
-    specific quotation, purchase order and/or the subscription or customized agreements and fails to remedy the breach
-    within ten (10) days from the receipt of a notification sent in writing or electronically,
-(b) Licensee’s deactivation or subscription cancellation of the Software,
-(c) Licensee fails to pay the Business Partner, or terminate the agreement with a Business Partner, or Business Partner
-    fails to pay Us the applicable fees of your Software and/or Services, or
+This Agreement begins on the Effective Date and shall remain in effect until
+terminated due to
+(a) Licensee fails to pay the fees amounts associated to Our subscriptions
+    when due or otherwise materially breaches this Agreement, specific
+    quotation, purchase order and/or the subscription or customized agreements
+    and fails to remedy the breach within ten (10) days from the receipt of a
+    notification sent in writing or electronically,
+(b) Licensee's deactivation or subscription cancellation of the Software,
+(c) Licensee fails to pay the Business Partner, or terminate the agreement with
+    a Business Partner, or Business Partner fails to pay Us the applicable fees
+    of your Software and/or Services, or
 (d) We change, cease to provide or discontinue the Software at any time.
 
-Upon the occurrence of (a), (b), (c) or (d), above, We are entitled to terminate this Agreement.
-Upon termination of this Agreement for any reason, Licensee shall discontinue use of the Software.
-If you have copies of the Software obtained when You still had an active subscription,
-you can keep using them indefinitely as long as you comply with this Agreement and VyOS Subscription Agreement,
-in particular - with Section 4 above and provided this is not intended to interfere with any rights
-you may have from other public and open source licenses.Termination shall not, however, relieve either party
-of obligations incurred prior to the termination. The following Sections shall survive termination of this Agreement:
-Definitions, Intellectual Property Rights, Limited Warranty, Limitation of Remedies and Liability,
-General, Term and Termination, and others which by their nature are intended to survive.
+Upon the occurrence of (a), (b), (c) or (d), above, We are entitled to
+terminate this Agreement. Upon termination of this Agreement for any reason,
+Licensee shall discontinue use of the Software. If you have copies of the
+Software obtained when You still had an active subscription, you can keep using
+them indefinitely as long as you comply with this Agreement and VyOS
+Subscription Agreement, in particular - with Section 4 above and provided this
+is not intended to interfere with any rights you may have from other public
+and open source licenses.Termination shall not, however, relieve either party
+of obligations incurred prior to the termination. The following Sections shall
+survive termination of this Agreement: Definitions, Intellectual Property
+Rights, Limited Warranty, Limitation of Remedies and Liability, General, Term
+and Termination, and others which by their nature are intended to survive.
 
-8. Limited Warranty 
+8. Limited Warranty
 
-Except as specifically stated in this Section 8, a separate agreement with Us, or a license for a particular component,
-to the maximum extent permitted under applicable law, the Software and the components are provided and licensed “as is”
-without warranty of any kind, express or implied, including the implied warranties of merchantability, non-infringement,
-integration, quiet enjoyment, satisfactory quality or fitness for a particular purpose.
-Neither Us nor Our affiliates and Business Partners warrant that the Software will meet your requirements,
-will be uninterrupted, timely, secure; that the operation of the Software will be entirely error-free, appear or perform
-precisely as described in the accompanying documentation, or comply with regulatory requirements;
-that the results that may be obtained from the use of the Software will be effective, accurate or reliable;
-the quality of the Software will meet your expectations; or that any errors or defects in the Software will be corrected.
-This warranty extends only to the party that purchases subscription services for the Software from Us
-and/or Our affiliates or a Our authorized Business Partner. 
+Except as specifically stated in this Section 8, a separate agreement with Us,
+or a license for a particular component, to the maximum extent permitted under
+applicable law, the Software and the components are provided and licensed
+"as is" without warranty of any kind, express or implied, including the
+implied warranties of merchantability, non-infringement, integration, quiet
+enjoyment, satisfactory quality or fitness for a particular purpose. Neither
+Us nor Our affiliates and Business Partners warrant that the Software will
+meet your requirements, will be uninterrupted, timely, secure; that the
+operation of the Software will be entirely error-free, appear or perform
+precisely as described in the accompanying documentation, or comply with
+regulatory requirements; that the results that may be obtained from the use of
+the Software will be effective, accurate or reliable; the quality of the
+Software will meet your expectations; or that any errors or defects in the
+Software will be corrected. This warranty extends only to the party that
+purchases subscription services for the Software from Us and/or Our affiliates
+or a Our authorized Business Partner.
 
-We and Our affiliates specifically disclaim any liability with regard to any actions resulting from your use of the Software.
-Any material downloaded or otherwise obtained through use of the Software is accessed at your own discretion and risk,
-and you will be solely responsible for any damage to your computer system or loss of data that results from use of the Software.
-We and Our affiliates assume no liability for any malicious software that may be downloaded to your computer
-as a result of your use of the Software.
+We and Our affiliates specifically disclaim any liability with regard to any
+actions resulting from your use of the Software. Any material downloaded or
+otherwise obtained through use of the Software is accessed at your own
+discretion and risk, and you will be solely responsible for any damage to your
+computer system or loss of data that results from use of the Software. We and
+Our affiliates assume no liability for any malicious software that may be
+downloaded to your computer as a result of your use of the Software.
 
-We will not be liable for any loss that you may incur as a result of a third party using your password or
-account or account information in connection with the Software, either with or without your knowledge.
+We will not be liable for any loss that you may incur as a result of a third
+party using your password or account or account information in connection with
+the Software, either with or without your knowledge.
 
-Licensee assumes the entire cost of all necessary servicing, repair, or correction of problems caused by viruses
-or other harmful components; We disclaim and makes no warranties or representations as to the accuracy, quality,
-reliability, suitability, completeness, truthfulness, usefulness, or effectiveness of the outputs, logs, reports,
-data, results or other information obtained, generated or otherwise received by Licensee from accessing
-and/or using the Software or otherwise resulting from this Agreement; and
+Licensee assumes the entire cost of all necessary servicing, repair, or
+correction of problems caused by viruses or other harmful components; We
+disclaim and makes no warranties or representations as to the accuracy,
+quality, reliability, suitability, completeness, truthfulness, usefulness, or
+effectiveness of the outputs, logs, reports, data, results or other information
+obtained, generated or otherwise received by Licensee from accessing and/or
+using the Software or otherwise resulting from this Agreement; and Licensee
+shall use the Software at its own risk and in no event shall We be liable to
+Licensee for any loss or damage of any kind (except personal injury or death
+resulting from Our negligence, fraud or fraudulent misrepresentation and any
+other liability that cannot be excluded by law) arising from Licensee's use of
+or inability to use the Software or from faults or defects in the Software
+whether caused by negligence or otherwise.
 
-Licensee shall use the Software at its own risk and in no event shall We be liable to Licensee for any loss or damage
-of any kind (except personal injury or death resulting from Our negligence, fraud or fraudulent misrepresentation
-and any other liability that cannot be excluded by law) arising from Licensee’s use of or inability to use the Software
-or from faults or defects in the Software whether caused by negligence or otherwise.
+Licensee agrees to defend, indemnify and hold Us harmless from any losses,
+liabilities, damages, actions, claims or expenses (including legal fees and
+court costs) arising or resulting from Licensee's breach of any term of this
+agreement or caused by acts or omissions performed by licensee.
 
-Licensee agrees to defend, indemnify and hold Us harmless from any losses, liabilities, damages, actions,
-claims or expenses (including legal fees and court costs) arising or resulting from Licensee’s breach
-of any term of this agreement or caused by acts or omissions performed by licensee.
+Some jurisdictions do not allow the exclusion of certain warranties, the
+limitation or exclusion of implied warranties, or limitations on how long an
+implied warranty may last, so the above limitations may not apply to you.
 
-Some jurisdictions do not allow the exclusion of certain warranties, the limitation or exclusion of implied warranties,
-or limitations on how long an implied warranty may last, so the above limitations may not apply to you.
+9. Limitation of Remedies and Liability
 
-9. Limitation of Remedies and Liability 
-
-To the maximum extent permitted under applicable law, under no circumstances will We, Our affiliates,
-any of Our authorized Business Partner, or the licensor of any component provided to you under this EULA
-be liable to you for any direct, indirect, incidental, special, exemplary, punitive, or consequential damages
-(including, but not limited to, procurement of substitute goods or services, computer failure or malfunction,
-loss of data or profits, business interruption, etc.) however caused and on any theory of liability,
-whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way
-out of the use of the software or inability to use the software, even if We, Our affiliates,
-an authorized Business Partner, and/or licensor  are aware of or have been advised of the possibility of such damage.
-To the extent permitted by law and as the maximum aggregate liability, Our or Our affiliates’ liability,
-an authorized Business Partner’s liability or the liability of the licensor of a component provided to you under
-or in connection with this EULA will be limited to the lesser of either five hundred United States dollars ($500)
-or the fees paid by the Licensee or by Business Partner and received by Us for the Software and attributable
-to the 6 month period immediately preceding the first event giving rise to such liability.
-The limitations and exclusions in this section  apply to the maximum extent permitted by applicable law in your jurisdiction.
-Some jurisdictions prohibit the exclusion or limitation of liability for incidental, consequential or punitive damages.
-Accordingly, the limitations and exclusions set forth above may not apply to you.
+To the maximum extent permitted under applicable law, under no circumstances
+will We, Our affiliates, any of Our authorized Business Partner, or the
+licensor of any component provided to you under this EULA be liable to you for
+any direct, indirect, incidental, special, exemplary, punitive, or
+consequential damages (including, but not limited to, procurement of substitute
+goods or services, computer failure or malfunction, loss of data or profits,
+business interruption, etc.) however caused and on any theory of liability,
+whether in contract, strict liability, or tort (including negligence or
+otherwise) arising in any way out of the use of the software or inability to
+use the software, even if We, Our affiliates, an authorized Business Partner,
+and/or licensor are aware of or have been advised of the possibility of such
+damage. To the extent permitted by law and as the maximum aggregate liability,
+Our or Our affiliates' liability, an authorized Business Partner's liability
+or the liability of the licensor of a component provided to you under or in
+connection with this EULA will be limited to the lesser of either five hundred
+United States dollars ($500) or the fees paid by the Licensee or by Business
+Partner and received by Us for the Software and attributable to the 6 month
+period immediately preceding the first event giving rise to such liability. The
+limitations and exclusions in this section  apply to the maximum extent
+permitted by applicable law in your jurisdiction. Some jurisdictions prohibit
+the exclusion or limitation of liability for incidental, consequential or
+punitive damages. Accordingly, the limitations and exclusions set forth above
+may not apply to you.
 
 10. Compliance and Export Control
 
-You understand that countries may restrict the import, use, export, re-export or transfer of encryption products
-and other controlled materials (which may include the Software or related technical information licensed hereunder).
-You agree to comply with export regulations by the Bureau of Industry and Security of the U.S. Department of Commerce
-and all applicable laws, restrictions and regulations in Your use of the Software, including but not limited to
-export restrictions of various countries that the Software may be subject to, and personal data protection regulations.
-You should comply with and oblige to secure Us from any breach of any law and regulation,
-from any claim or litigation arising as a result of such breach and to reimburse Us any loss, resulting from such breach.
-You will not use the Software for a prohibited use.
-10.1 Sanctions compliance. You undertake to follow that You and any person, allowed to use the Software and the Services by You,
-is not a subject or the target of sanctions, embargoes and restrictive measures (“Sanctions”),
-administered by the Office of Foreign Assets Control of the U.S. Department of the Treasury or the U.S. Department of State,
-the United Nations Security Council, the European Union, Her Majesty’s Treasury of the United Kingdom,
+You understand that countries may restrict the import, use, export, re-export
+or transfer of encryption products and other controlled materials (which may
+include the Software or related technical information licensed hereunder). You
+agree to comply with export regulations by the Bureau of Industry and Security
+of the U.S. Department of Commerce and all applicable laws, restrictions and
+regulations in Your use of the Software, including but not limited to export
+restrictions of various countries that the Software may be subject to, and
+personal data protection regulations. You should comply with and oblige to
+secure Us from any breach of any law and regulation, from any claim or
+litigation arising as a result of such breach and to reimburse Us any loss,
+resulting from such breach. You will not use the Software for a prohibited use.
+10.1 Sanctions compliance. You undertake to follow that You and any person,
+allowed to use the Software and the Services by You, is not a subject or the
+target of sanctions, embargoes and restrictive measures ("Sanctions"),
+administered by the Office of Foreign Assets Control of the U.S. Department of
+the Treasury or the U.S. Department of State, the United Nations Security
+Council, the European Union, Her Majesty's Treasury of the United Kingdom,
 Department of Foreign Affairs and Trade of the Australian Federal Government,
-or other relevant sanctions authority (“Sanctioning Authorities”).   
+or other relevant sanctions authority ("Sanctioning Authorities").
 
-You undertake to comply with all the abovementioned Sanctions in all possible ways to keep Us harmless
-and oblige to immediately terminate  relations with any person that becomes (or is)
-subject or target of any of the abovementioned Sanctions, or assists anybody to evade or violate the above mentioned Sanctions.
+You undertake to comply with all the abovementioned Sanctions in all possible
+ways to keep Us harmless and oblige to immediately terminate  relations with
+any person that becomes (or is) subject or target of any of the abovementioned
+Sanctions, or assists anybody to evade or violate the above mentioned Sanctions.
 
-11. Third-Party Beneficiary 
+11. Third-Party Beneficiary
 
-Licensee acknowledges and agrees that Our licensors (and/or Us if Licensee obtained the Software from any party other than Us)
-are third party beneficiaries of this Agreement, with the right to enforce the obligations set forth herein
-with respect to the respective technology of such licensors and/or Ours.
+Licensee acknowledges and agrees that Our licensors (and/or Us if Licensee
+obtained the Software from any party other than Us) are third party
+beneficiaries of this Agreement, with the right to enforce the obligations set
+forth herein with respect to the respective technology of such licensors and/or
+Ours.
 
 12. Third-party components, contributions and software programs
 
 We do not assert any Intellectual Property Rights over:
-(i) components created by third parties that may be taken from upstream sources in binary form compiled by Us from the source code;
-(ii) source code and documentation of the Software, which is developed collaboratively
-     and is open to contributions by parties not affiliated with Us (to such purpose, contributors give Us non-exclusive rights
-     according to the licenses of the Software and documentation);
-(iii) third parties software or programs included therein or therewith the Software. 
+(a) components created by third parties that may be taken from upstream
+    sources in binary form compiled by Us from the source code;
+(b) source code and documentation of the Software, which is develope
+    ollaboratively and is open to contributions by parties not affiliated with
+    Us (to such purpose, contributors give Us non-exclusive rights according
+    to the licenses of the Software and documentation);
+(c) third parties software or programs included therein or therewith the
+    Software.
 
 13. General
 
-If any provision of this EULA is held to be unenforceable, the enforceability of the remaining provisions shall not be affected. 
+If any provision of this EULA is held to be unenforceable, the enforceability
+of the remaining provisions shall not be affected.
 
-Updates and upgrades may be licensed to Licensee by Us with additional or different terms.
+Updates and upgrades may be licensed to Licensee by Us with additional or
+different terms.
 
-You are not allowed to transfer or assign this EULA or any rights hereunder, unless with Our previous written consent.
-Please inform Us of Your intention  to transfer or assign in advance so We can respond accordingly.
-Conversely, We may transfer, assign, sublicense or delegate the EULA or any portions thereof, without restriction.
-We also may subcontract any performance associated with the Software to third parties,
-provided that such subcontract does not relieve Us of any of Our obligations under this EULA. 
+You are not allowed to transfer or assign this EULA or any rights hereunder,
+unless with Our previous written consent. Please inform Us of Your intention
+to transfer or assign in advance so We can respond accordingly. Conversely, We
+may transfer, assign, sublicense or delegate the EULA or any portions thereof,
+without restriction. We also may subcontract any performance associated with
+the Software to third parties, provided that such subcontract does not relieve
+Us of any of Our obligations under this EULA.
 
-Licensee may not sublicense, transfer or assign, whether voluntarily or by operation of law,
-any right or license in or to the Software. Any attempted sublicense, transfer or assignment shall be void.
+Licensee may not sublicense, transfer or assign, whether voluntarily or by
+operation of law, any right or license in or to the Software. Any attempted
+sublicense, transfer or assignment shall be void.
 
 We may, from time-to-time modify this agreement.
 
-Licensee shall comply with all applicable laws and regulations pertaining to this Agreement
+Licensee shall comply with all applicable laws and regulations pertaining to
+this Agreement
 
-This Agreement, along with a VyOS Subscription Agreement, Privacy Policy and Terms and Conditions,
-any quotation, purchase order and services level agreement, if applicable, and any other documents
-deemed to be incorporated by reference in it, constitutes the entire agreement between the parties
-with respect to its subject matter and it supersedes all prior or contemporaneous agreements concerning such matter.
-If you order VyOS from a Business Partner, then any agreement that you enter into with a Business Partner
-is solely between you and a Business Partner and will not be binding on Us.
+This Agreement, along with a VyOS Subscription Agreement, Privacy Policy and
+Terms and Conditions, any quotation, purchase order and services level
+agreement, if applicable, and any other documents deemed to be incorporated by
+reference in it, constitutes the entire agreement between the parties with
+respect to its subject matter and it supersedes all prior or contemporaneous
+agreements concerning such matter. If you order VyOS from a Business Partner,
+then any agreement that you enter into with a Business Partner is solely
+between you and a Business Partner and will not be binding on Us.
 
-In the table below, “Customer Location” refers to where Customer is located
-(as determined by Customer’s business address on the invoice) and determines which table row applies to Customer:
+In the table below, "Customer Location" refers to where Customer is located
+(as determined by Customer's business address on the invoice) and determines
+which table row applies to Customer:
 
-Customer Location*			VyOS Contracting Entity			Governing Law		Venue/Courts
-North & South America		VyOS Inc	             		California	    	Poway
-EEA & UK
-(except Spain & Portugal)	VyOS EMEA Operations Limited	Ireland				Cork
-Spain, Andorra & Portugal	VyOS Networks Iberia SLU		Spain				Madrid
-Asia & Oceania				VyOS APAC Pty Ltd				Australia			Sydney
-Non-EEA parts of Europe, Middle East, & Africa
-(except Andorra)			VyOS Networks Cyprus Limited	Cyprus				Limassol
+Customer Location*         VyOS Contracting Entity  Governing Law  Venue/Courts
+==================         =======================  =============  ============
+North & South America      VyOS Inc                  California    Poway
 
-*all sales via Cloud Providers are generally done by VyOS Inc.,
-unless otherwise decided by Us regardless of Customer location. 
+EEA & UK                   VyOS EMEA Operations      Ireland       Cork
+(except Spain & Portugal)  Limited
 
-References to “We”, “Our”, “Us” are references to the applicable VyOS Contracting Entity specified in the Contracting Entity Table,
-unless otherwise has been decided for operational purposes, in the Quotation and in the invoice. The Services are provided by that VyOS Contracting Entity.
+Spain, Andorra & Portugal  VyOS Networks Iberia SLU  Spain         Madrid
 
-This Agreement, and any disputes arising out of or related hereto, will be governed exclusively by the applicable governing law above,
-without giving effect to any of its conflicts of laws, rules or principles.
-The courts located in the applicable venue above will have exclusive jurisdiction to adjudicate any dispute arising out of
-or relating to this Agreement or its formation, interpretation, or enforcement. Each party hereby consents and submits
-to the exclusive jurisdiction of such courts. Before resorting to any external dispute resolution mechanisms,
-the parties agree to use their best efforts in good faith to settle any dispute in relation to the Agreement. 
+Asia & Oceania             VyOS APAC Pty Ltd         Australia     Sydney
 
-We may, in our sole discretion, amend this EULA at any time by posting a revised version thereof on Our website and,
-by updating the “last updated” date on the applicable page, or by providing reasonable notice.
-Your continued use of the Software following changes to the Agreement after the effective date of a revised version thereof
-constitutes Your expressed acceptance of and the agreement to be bound by the Agreement and its future versions or updates.
+Non-EEA parts of Europe,   VyOS Networks Cyprus      Cyprus        Limassol
+Middle East, & Africa      Limited
+(except Andorra)
+
+*all sales via Cloud Providers are generally done by VyOS Inc., unless
+otherwise decided by Us regardless of Customer location.
+
+References to "We", "Our", "Us" are references to the applicable VyOS
+Contracting Entity specified in the Contracting Entity Table, unless otherwise
+has been decided for operational purposes, in the Quotation and in the invoice.
+The Services are provided by that VyOS Contracting Entity.
+
+This Agreement, and any disputes arising out of or related hereto, will be
+governed exclusively by the applicable governing law above, without giving
+effect to any of its conflicts of laws, rules or principles. The courts located
+in the applicable venue above will have exclusive jurisdiction to adjudicate
+any dispute arising out of or relating to this Agreement or its formation,
+interpretation, or enforcement. Each party hereby consents and submits to the
+exclusive jurisdiction of such courts. Before resorting to any external dispute
+resolution mechanisms, the parties agree to use their best efforts in good
+faith to settle any dispute in relation to the Agreement.
+
+We may, in our sole discretion, amend this EULA at any time by posting a
+revised version thereof on Our website and, by updating the "last updated"
+date on the applicable page, or by providing reasonable notice. Your continued
+use of the Software following changes to the Agreement after the effective
+date of a revised version thereof constitutes Your expressed acceptance of and
+the agreement to be bound by the Agreement and its future versions or updates.
 
 '''
