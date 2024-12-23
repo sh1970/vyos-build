@@ -40,7 +40,6 @@ There are several directories with their own purpose:
  * `scripts/`  Scripts that are used for the build process
  * `tools/`    Scripts that are used for maintainer's tasks automation and other
                purposes, but not during ISO build process
- * `vars/`     Jenkins Pipeline library for reusable functions
 
 # Building VyOS
 
