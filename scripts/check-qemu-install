@@ -375,8 +375,10 @@ try:
         toggleUEFISecureBoot(c)
 
     try:
-        c.expect('Automatic boot in', timeout=10)
-        c.sendline('')
+        c.expect('Welcome to GRUB', timeout=10)
+        c.send(KEY_DOWN)
+        c.send(KEY_DOWN)
+        c.send(KEY_RETURN)
     except pexpect.TIMEOUT:
         log.warning('Did not find GRUB countdown window, ignoring')
 
