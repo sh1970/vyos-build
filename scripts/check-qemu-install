@@ -155,7 +155,8 @@ def get_qemu_cmd(name, enable_uefi, disk_img, raid=None, iso_img=None, tpm=False
                 f' -device ahci,id=achi0' \
                 f' -device ide-cd,bus=achi0.0,drive=drive-cd1,id=cd1,bootindex=10'
 
-    macbase = '02:00:00:00:00'
+    # RFC7042 section 2.1.2 MAC addresses used for documentation
+    macbase = '00:00:5E:00:53'
     cmd = f'qemu-system-x86_64 \
         -name "{name}" \
         -smp 2,sockets=1,cores=2,threads=1 \
