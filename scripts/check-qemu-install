@@ -107,7 +107,7 @@ with open('build/manifest.json', 'rb') as f:
     manifest = json.load(f)
 
 vyos_version = manifest['build_config']['version']
-vyos_codename = manifest['build_config']['debian_distribution']
+vyos_codename = manifest['build_config']['release_train']
 
 class StreamToLogger(object):
     """
