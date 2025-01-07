@@ -1,0 +1,15 @@
+[[packages]]
+name = "vpp"
+commit_id = "stable/2406"
+scm_url = "https://github.com/FDio/vpp"
+
+build_cmd = """
+make UNATTENDED=yes install-dep
+make pkg-deb
+cp build-root/*.deb ../
+"""
+
+[dependencies]
+packages = [
+    "llvm"
+]
