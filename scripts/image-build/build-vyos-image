@@ -462,7 +462,7 @@ if __name__ == "__main__":
 NAME="VyOS"
 VERSION_ID="{version}"
 VERSION="{version} ({build_config['release_train']})"
-VERSION_CODENAME={build_defaults['debian_distribution']}
+VERSION_CODENAME={build_defaults['release_train']}
 ID=vyos
 BUILD_ID="{build_git}"
 HOME_URL="{build_defaults['website_url']}"
