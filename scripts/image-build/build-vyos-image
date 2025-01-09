@@ -438,6 +438,8 @@ if __name__ == "__main__":
                 print("W: Could not build a version string specific to git branch, falling back to default: {0}".format(str(e)))
                 version = "999.{0}".format(build_timestamp)
 
+            build_config['version'] = version
+
         version_data = {
             'version': version,
             'flavor': build_config["build_flavor"],
