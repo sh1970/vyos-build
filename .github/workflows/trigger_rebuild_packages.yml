@@ -51,6 +51,8 @@ jobs:
               - 'scripts/package-build/kea/**'
             keepalived:
               - 'scripts/package-build/keepalived/**'
+            libpam-radius-auth:
+              - 'scripts/package-build/libpam-radius-auth/**'
             linux-kernel:
               - 'data/defaults.toml'
               - 'scripts/package-build/linux-kernel/**'
@@ -159,6 +161,10 @@ jobs:
 
           if [ "${{ steps.changes.outputs.keepalived }}" == "true" ]; then
             trigger_build "keepalived"
+          fi
+
+          if [ "${{ steps.changes.outputs.libpam-radius-auth }}" == "true" ]; then
+            trigger_build "libpam-radius-auth"
           fi
 
           if [ "${{ steps.changes.outputs.linux-kernel }}" == "true" ]; then

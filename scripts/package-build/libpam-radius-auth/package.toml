@@ -1,0 +1,10 @@
+[[packages]]
+name = "libpam-radius-auth"
+commit_id = "current"
+scm_url = "https://github.com/vyos/libpam-radius-auth.git"
+
+[dependencies]
+packages = [
+    "libpam-dev",
+    "libaudit-dev"
+]
