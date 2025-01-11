@@ -1,7 +1,18 @@
 [[packages]]
+name = "vyos-vpp-patches"
+commit_id = "current"
+scm_url = "https://github.com/vyos/vyos-vpp-patches"
+build_cmd = "/bin/true"
+
+[[packages]]
 name = "vpp"
 commit_id = "stable/2406"
 scm_url = "https://github.com/FDio/vpp"
+
+pre_build_hook = """
+mkdir -p ../patches/vpp/
+rsync -av ../vyos-vpp-patches/patches/vpp/ ../patches/vpp/
+"""
 
 build_cmd = """
 make UNATTENDED=yes install-dep
