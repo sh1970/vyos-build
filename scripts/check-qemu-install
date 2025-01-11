@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (C) 2019-2024, VyOS maintainers and contributors
+# Copyright (C) 2019-2025, VyOS maintainers and contributors
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 2 or later as
@@ -95,6 +95,8 @@ parser.add_argument('--sbtest', help='Execute Secure Boot tests',
                 action='store_true', default=False)
 parser.add_argument('--qemu-cmd', help='Only generate QEMU launch command',
                 action='store_true', default=False)
+parser.add_argument('--cpu', help='Set QEMU CPU', type=int, default=2)
+parser.add_argument('--memory', help='Set QEMU memory', type=int, default=4)
 
 args = parser.parse_args()
 
@@ -168,11 +170,11 @@ def get_qemu_cmd(name, enable_uefi, disk_img, raid=None, iso_img=None, tpm=False
     macbase = '00:00:5E:00:53'
     cmd = f'qemu-system-x86_64 \
         -name "{name}" \
-        -smp 2,sockets=1,cores=2,threads=1 \
+        -smp {args.cpu},sockets=1,cores={args.cpu},threads=1 \
         -cpu host \
         -machine {machine},accel=kvm \
         {uefi} \
-        -m 4G \
+        -m {args.memory}G \
         -vga none \
         -nographic \
         {vga} {vnc}\
@@ -545,6 +547,10 @@ try:
     c.expect(op_mode_prompt)
     c.sendline('systemd-detect-virt')
     c.expect('kvm')
+    c.expect(op_mode_prompt)
+    c.sendline('show system cpu')
+    c.expect(op_mode_prompt)
+    c.sendline('show system memory')
     c.expect(op_mode_prompt)
 
     #################################################
