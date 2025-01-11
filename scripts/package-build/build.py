@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (C) 2024 VyOS maintainers and contributors
+# Copyright (C) 2024-2025 VyOS maintainers and contributors
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 2 or later as
@@ -91,6 +91,34 @@ def build_package(package: list, patch_dir: Path) -> None:
 
         # Check out the specific commit
         run(['git', 'checkout', package['commit_id']], cwd=repo_dir, check=True)
+
+        # The `pre_build_hook` is an optional configuration defined in `package.toml`.
+        # It executes after the repository is checked out and before the build process begins.
+        # This hook allows you to perform preparatory tasks, such as creating directories,
+        # copying files, or running custom scripts/commands.
+        #
+        # Usage:
+        # - Single command:
+        #     pre_build_hook = "echo 'Hello Pre-Build-Hook'"
+        #
+        # - Multi-line commands:
+        #     pre_build_hook = """
+        #       mkdir -p ../hello/vyos
+        #       mkdir -p ../vyos
+        #       cp example.txt ../vyos
+        #     """
+        #
+        # - Combination of commands and scripts:
+        #     pre_build_hook = "ls -l; ./script.sh"
+        pre_build_hook = package.get('pre_build_hook', '')
+        if pre_build_hook:
+            try:
+                print(f'I: execute pre_build_hook for the package "{repo_name}"')
+                run(pre_build_hook, cwd=repo_dir, check=True, shell=True)
+            except CalledProcessError as e:
+                print(e)
+                print(f"I: pre_build_hook failed for the {repo_name}")
+                raise
 
         # Apply patches if any
         if (repo_dir / 'patches'):
