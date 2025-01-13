@@ -64,8 +64,6 @@ jobs:
               - 'scripts/package-build/netfilter/**'
             node_exporter:
               - 'scripts/package-build/node_exporter/**'
-            opennhrp:
-              - 'scripts/package-build/opennhrp/**'
             openvpn-otp:
               - 'scripts/package-build/openvpn-otp/**'
             owamp:
@@ -185,10 +183,6 @@ jobs:
 
           if [ "${{ steps.changes.outputs.node_exporter }}" == "true" ]; then
             trigger_build "node_exporter"
-          fi
-
-          if [ "${{ steps.changes.outputs.opennhrp }}" == "true" ]; then
-            trigger_build "opennhrp"
           fi
 
           if [ "${{ steps.changes.outputs.openvpn-otp }}" == "true" ]; then
