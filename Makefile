@@ -36,7 +36,7 @@ test-interfaces: checkiso
 .PHONY: test-vpp
 .ONESHELL:
 test-vpp: checkiso
-	scripts/check-qemu-install --debug --configd --match="vpp" --smoketest --uefi build/live-image-amd64.hybrid.iso
+	scripts/check-qemu-install --debug --configd --match="vpp" --smoketest --uefi --cpu 2 --memory 8 build/live-image-amd64.hybrid.iso
 
 .PHONY: testc
 .ONESHELL:
