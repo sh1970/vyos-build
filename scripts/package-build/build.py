@@ -120,9 +120,17 @@ def build_package(package: list, patch_dir: Path) -> None:
                 print(f"I: pre_build_hook failed for the {repo_name}")
                 raise
 
-        # Apply patches if any
-        if (repo_dir / 'patches'):
-            apply_patches(repo_dir, patch_dir / repo_name)
+        # Apply patches if the 'apply_patches' key is set to True (default) in the package configuration
+        # This allows skipping patch application for specific packages when desired
+        #
+        # Usage:
+        #   apply_patches = false
+        #
+        # Default to True if the key is missing
+        if package.get('apply_patches', True):
+            # Check if the 'patches' directory exists in the repository
+            if (repo_dir / 'patches'):
+                apply_patches(repo_dir, patch_dir / repo_name)
 
         # Sanitize the commit ID and build a tarball for the package
         commit_id_sanitized = package['commit_id'].replace('/', '_')
