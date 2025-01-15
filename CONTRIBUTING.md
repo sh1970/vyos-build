@@ -40,7 +40,7 @@ task first. Once there is an entry in Phabricator, you should reference its id
 in your commit message, as shown below:
 
 * `ddclient: T1030: auto create runtime directories`
-* `Jenkins: add current Git commit ID to build description`
+* `keepalived: T1234: do not autostart service, will be done by CLI`
 
 If there is no [Phabricator](https://vyos.dev) reference in the
 commits of your pull request, we have to ask you to amend the commit message.
