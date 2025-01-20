@@ -1,3 +1,0 @@
-image_format = "iso"
-
-packages = ["amazon-cloudwatch-agent"]

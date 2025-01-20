@@ -1,7 +1,7 @@
 <!-- All PR should follow this template to allow a clean and transparent review -->
 <!-- Text placed between these delimiters is considered a comment and is not rendered -->
 
-## Change Summary
+## Change summary
 <!--- Provide a general summary of your changes in the Title above -->
 
 ## Types of changes
@@ -21,27 +21,14 @@ the box, please use [x]
 <!-- optional: Link to related other tasks on Phabricator. -->
 <!-- * https://vyos.dev/Txxxx -->
 
-## Component(s) name
-<!-- A rather incomplete list of components: ethernet, wireguard, bgp, mpls, ldp, l2tp, dhcp ... -->
-
-## Proposed changes
-<!--- Describe your changes in detail -->
-
-## How to test
-<!---
-Please describe in detail how you tested your changes. Include details of your testing
-environment, and the tests you ran. When pasting configs, logs, shell output, backtraces,
-and other large chunks of text, surround this text with triple backtics
-```
-like this
-```
--->
+## Related PR(s)
+<!-- Link here any PRs in other repositories that are required by this PR -->
 
 ## Checklist:
 <!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
 <!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
 <!--- The entire development process is outlined here: https://docs.vyos.io/en/latest/contributing/development.html -->
-- [ ] I have read the [**CONTRIBUTING**](https://github.com/vyos/vyos-build/blob/current/CONTRIBUTING.md) document
+- [ ] I have read the [**CONTRIBUTING**](https://github.com/vyos/vyos-1x/blob/current/CONTRIBUTING.md) document
 - [ ] I have linked this PR to one or more Phabricator Task(s)
 - [ ] My commit headlines contain a valid Task id
 - [ ] My change requires a change to the documentation

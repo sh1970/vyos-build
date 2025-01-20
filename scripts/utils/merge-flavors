@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+#
+# Copyright (C) 2024 VyOS maintainers and contributors
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 or later as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Purpose: merges multiple flavor files into one
+
+import sys
+
+import tomli
+import tomli_w
+
+def load_flavor(file_path):
+    with open(file_path, 'rb') as f:
+        flavor_def = tomli.load(f)
+
+    return flavor_def
+
+# XXX: at the moment, this script is only used
+# to produce a meta-flavor for collecting packages
+# used in multiple flavors,
+# so it ignores all other flavor fields for now
+def merge_flavors(l, r):
+    if 'packages' in r:
+        l['packages'] += r['packages']
+
+    for arch in r.get('architectures', []):
+        if arch not in l['architectures']:
+            l['architectures'][arch] = {}
+
+        if 'packages' not in l['architectures'][arch]:
+            l['architectures'][arch]['packages'] = []
+
+        if 'packages' in r['architectures'][arch]:
+            l['architectures'][arch]['packages'] += \
+              r['architectures'][arch]['packages']
+
+    return l
+
+if __name__ == '__main__':
+    if len(sys.argv) < 3:
+        print("Please specify a base flavor and a list of flavor files to merge!")
+        sys.exit(1)
+
+    base_flavor = load_flavor(sys.argv[1])
+
+    if 'architectures' not in base_flavor:
+        base_flavor['architectures'] = {}
+
+    if 'packages' not in base_flavor:
+        base_flavor['packages'] = []
+
+    flavor_files = sys.argv[2:]
+    flavor_defs = map(load_flavor, flavor_files)
+
+    for fd in flavor_defs:
+        merge_flavors(base_flavor, fd)
+
+    base_flavor['packages'] = list(set(base_flavor['packages']))
+    for arch in base_flavor.get('architectures'):
+        if 'packages' in base_flavor['architectures'][arch]:
+            base_flavor['architectures'][arch]['packages'] = \
+              list(set(base_flavor['architectures'][arch]['packages']))
+
+    print(tomli_w.dumps(base_flavor))

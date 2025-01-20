@@ -1,0 +1,14 @@
+[[packages]]
+name = "amazon-cloudwatch-agent"
+commit_id = "v1.300050.0"
+scm_url = "https://github.com/aws/amazon-cloudwatch-agent"
+
+build_cmd = """
+
+make clean test check_secrets amazon-cloudwatch-agent-linux package-deb
+ARCH=$(dpkg --print-architecture)
+TAG=$(git describe --tags --abbrev=0)
+COMMIT=$(git rev-parse --short HEAD)
+cp ./build/bin/linux/${ARCH}/*.deb ../amazon-cloudwatch-agent_${TAG}_${COMMIT}_${ARCH}.deb
+
+"""
