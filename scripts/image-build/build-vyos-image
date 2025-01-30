@@ -590,6 +590,15 @@ DOCUMENTATION_URL="{build_config['documentation_url']}"
                 with open(file_path, 'w') as f:
                     f.write(i["data"])
 
+        if has_nonempty_key(build_config, "includes_binary"):
+            for i in build_config["includes_binary"]:
+                file_path = os.path.join(binary_includes_dir, i["path"])
+                if debug:
+                    print(f"D: Creating binary image include file: {file_path}")
+                os.makedirs(os.path.dirname(file_path), exist_ok=True)
+                with open(file_path, 'w') as f:
+                    f.write(i["data"])
+
         ## Create the default config
         ## Technically it's just another includes.chroot entry,
         ## but it's special enough to warrant making it easier for flavor writers
