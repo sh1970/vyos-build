@@ -69,6 +69,7 @@ systemctl disable dpkg-db-backup.service
 systemctl disable zabbix-agent2.service
 systemctl disable suricata.service
 systemctl disable vyconfd.service
+systemctl disable vpp.service
 
 echo I: Enabling services
 systemctl enable vyos-hostsd.service
