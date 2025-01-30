@@ -554,6 +554,8 @@ try:
     c.expect(op_mode_prompt)
     c.sendline('show system memory')
     c.expect(op_mode_prompt)
+    c.sendline("show version all | match vpp")
+    c.expect(op_mode_prompt)
 
     #################################################
     # Verify /etc/os-release via lsb_release
