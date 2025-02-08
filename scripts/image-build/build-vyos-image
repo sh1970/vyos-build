@@ -25,6 +25,7 @@ import copy
 import uuid
 import glob
 import json
+import base64
 import shutil
 import argparse
 import datetime
@@ -43,10 +44,9 @@ try:
     import tomli
     import jinja2
     import git
-    import psutil
 except ModuleNotFoundError as e:
     print(f"E: Cannot load required library {e}")
-    print("E: Please make sure the following Python3 modules are installed: tomli jinja2 git psutil")
+    print("E: Please make sure the following Python3 modules are installed: tomli jinja2 git")
     sys.exit(1)
 
 # Import local defaults
@@ -63,7 +63,7 @@ except Exception as e:
 # Checkout vyos-1x under build directory
 try:
     branch_name = build_defaults['vyos_branch']
-    url_vyos_1x = 'https://github.com/vyos/vyos-1x'
+    url_vyos_1x = os.getenv('VYOS1X_REPO_URL', default='https://github.com/vyos/vyos-1x')
     path_vyos_1x = os.path.join(defaults.BUILD_DIR, 'vyos-1x')
     try:
         repo_vyos_1x = git.Repo.clone_from(url_vyos_1x, path_vyos_1x, no_checkout=True)
@@ -96,7 +96,7 @@ else:
 import utils
 import raw_image
 
-from utils import cmd
+from utils import cmd, rc_cmd
 
 ## Check if there are missing build dependencies
 deps = {
@@ -192,8 +192,10 @@ if __name__ == "__main__":
        'pbuilder-debian-mirror': ('Debian repository mirror for pbuilder env bootstrap', None),
        'vyos-mirror': ('VyOS package mirror', None),
        'build-type': ('Build type, release or development', lambda x: x in ['release', 'development']),
-       'version': ('Version number (release builds only)', None),
-       'build-comment': ('Optional build comment', None)
+       'version': ('Version string', None),
+       'build-comment': ('Optional build comment', None),
+       'build-hook-opts': ('Custom options for the post-build hook', None),
+       'bootloaders': ('Bootloaders to include in the image', None)
     }
 
     # Create the option parser
@@ -259,28 +261,24 @@ if __name__ == "__main__":
     pre_build_config = merge_defaults(args, defaults=pre_build_config, skip_none=True)
 
     # Some fixup for mirror settings.
-    # The idea is: if --debian-mirror is specified but --pbuilder-debian-mirror is not,
-    # use the --debian-mirror value for both lb and pbuilder bootstrap
-    if pre_build_config['debian_mirror'] is None or pre_build_config['debian_security_mirror'] is None:
-        print("E: debian_mirror and debian_security_mirror cannot be empty")
+    # The idea is: if --debian-mirror is specified
+    # but --pbuilder-debian-mirror or --debian-security-mirror are not,
+    # use the --debian-mirror value for those
+    if pre_build_config['debian_mirror'] is None:
+        print("E: debian_mirror must be specified")
         sys.exit(1)
 
     if pre_build_config['pbuilder_debian_mirror'] is None:
-        args['pbuilder_debian_mirror'] = pre_build_config['pbuilder_debian_mirror'] = pre_build_config['debian_mirror']
+        pre_build_config['pbuilder_debian_mirror'] = pre_build_config['debian_mirror']
 
-    # Version can only be set for release builds,
-    # for dev builds it hardly makes any sense
-    if pre_build_config['build_type'] == 'development':
-        if args['version'] is not None:
-            print("E: Version can only be set for release builds")
-            print("Use --build-type=release option if you want to set version number")
-            sys.exit(1)
+    if pre_build_config['debian_security_mirror'] is None:
+        pre_build_config['debian_security_mirror'] = pre_build_config['debian_mirror']
 
     # Validate characters in version name
-    if 'version' in args and args['version'] != None:
+    if args.get('version'):
         allowed = string.ascii_letters + string.digits + '.' + '-' + '+'
         if not set(args['version']) <= set(allowed):
-            print(f'Version contained illegal character(s), allowed: {allowed}')
+            print(f'Version string contains illegal character(s), allowed: {allowed}')
             sys.exit(1)
 
     ## Inject some useful hardcoded options
@@ -306,6 +304,11 @@ if __name__ == "__main__":
     build_config = merge_defaults(flavor_config, defaults=build_config)
     build_config = merge_defaults(args, defaults=build_config, skip_none=True)
 
+    # If Debian mirror is specified explicitly but Debian security mirror is not,
+    # assume that the user wants to use that mirror for security updates as well.
+    if (args['debian_mirror'] is not None) and (args['debian_security_mirror'] is None):
+        build_config['debian_security_mirror'] = args['debian_mirror']
+
     ## Rename and merge some fields for simplicity
     ## E.g. --custom-packages is for the user, but internally
     ## it's added to the same package list as everything else
@@ -326,6 +329,10 @@ if __name__ == "__main__":
         print("E: image format is not specified in the build flavor file")
         sys.exit(1)
 
+    ## Override bootloaders if specified
+    if args['bootloaders'] is not None:
+        build_config['bootloaders'] = args['bootloaders']
+
     ## Add default boot settings if needed
     if "boot_settings" not in build_config:
         build_config["boot_settings"] = defaults.boot_settings
@@ -336,6 +343,17 @@ if __name__ == "__main__":
     ## (like `image_format = "iso"`)
     if type(build_config["image_format"]) != list:
         build_config["image_format"] = [ build_config["image_format"] ]
+
+    ## If the user didn't explicitly specify what extensions build artifact should have,
+    ## assume that the list is the same as image formats.
+    ## One case when it's not the same is when a custom build hook is used
+    ## to build a format that our build script doesn't support natively.
+    if not has_nonempty_key(build_config, "artifact_format"):
+        build_config["artifact_format"] = build_config["image_format"]
+    else:
+        # If the option is there, also make it list if it's a scalar
+        if type(build_config["artifact_format"]) != list:
+            build_config["artifact_format"] = [ build_config["artifact_format"] ]
 
     ## Dump the complete config if the user enabled debug mode
     if debug:
@@ -356,10 +374,18 @@ if __name__ == "__main__":
     # not to the vyos-build repository root.
     os.chdir(defaults.BUILD_DIR)
 
+    ## Initialize build manifest
+    manifest = {
+      'build_config' : build_config,
+      'artifacts' : [],
+      'pre_build_config' : pre_build_config
+    }
+
     iso_file = None
 
     if build_config["reuse_iso"]:
         iso_file = build_config["reuse_iso"]
+        manifest["artifacts"] = [iso_file]
     else:
         ## Create the version file
 
@@ -393,8 +419,10 @@ if __name__ == "__main__":
             build_git = ""
             git_branch = ""
 
-        # Create the build version string
-        if build_config['build_type'] == 'development':
+        # Create the build version string, if it's not explicitly given
+        if build_config.get('version'):
+            version = build_config['version']
+        else:
             try:
                 if not git_branch:
                     raise ValueError("git branch could not be determined")
@@ -409,14 +437,8 @@ if __name__ == "__main__":
             except Exception as e:
                 print("W: Could not build a version string specific to git branch, falling back to default: {0}".format(str(e)))
                 version = "999.{0}".format(build_timestamp)
-        else:
-            # Release build, use the version from ./configure arguments
-            version = build_config['version']
 
-        if build_config['build_type'] == 'development':
-            lts_build = False
-        else:
-            lts_build = True
+            build_config['version'] = version
 
         version_data = {
             'version': version,
@@ -428,7 +450,7 @@ if __name__ == "__main__":
             'build_branch': git_branch,
             'release_train': build_config['release_train'],
             'architecture': build_config['architecture'],
-            'lts_build': lts_build,
+            'build_type': build_config['build_type'],
             'build_comment': build_config['build_comment'],
             'bugtracker_url': build_config['bugtracker_url'],
             'documentation_url': build_config['documentation_url'],
@@ -438,19 +460,18 @@ if __name__ == "__main__":
 
         # Multi line strings needs to be un-indented to not have leading
         # whitespaces in the resulting file
-        os_release = f"""
-    PRETTY_NAME="VyOS {version} ({build_config['release_train']})"
-    NAME="VyOS"
-    VERSION_ID="{version}"
-    VERSION="{version} ({build_config['release_train']})"
-    VERSION_CODENAME={build_defaults['debian_distribution']}
-    ID=vyos
-    BUILD_ID="{build_git}"
-    HOME_URL="{build_defaults['website_url']}"
-    SUPPORT_URL="{build_defaults['support_url']}"
-    BUG_REPORT_URL="{build_defaults['bugtracker_url']}"
-    DOCUMENTATION_URL="{build_config['documentation_url']}"
-        """
+        os_release = f"""PRETTY_NAME="VyOS {version} ({build_config['release_train']})"
+NAME="VyOS"
+VERSION_ID="{version}"
+VERSION="{version} ({build_config['release_train']})"
+VERSION_CODENAME={build_defaults['release_train']}
+ID=vyos
+BUILD_ID="{build_git}"
+HOME_URL="{build_defaults['website_url']}"
+SUPPORT_URL="{build_defaults['support_url']}"
+BUG_REPORT_URL="{build_defaults['bugtracker_url']}"
+DOCUMENTATION_URL="{build_config['documentation_url']}"
+"""
 
         # Reminder: all paths relative to the build dir, not to the repository root
         chroot_includes_dir = defaults.CHROOT_INCLUDES_DIR
@@ -470,8 +491,8 @@ if __name__ == "__main__":
             print("Version: {0}".format(version), file=f)
 
         # Define variables that influence to welcome message on boot
-        os.makedirs(os.path.join(chroot_includes_dir, 'usr/lib/'), exist_ok=True)
-        with open(os.path.join(chroot_includes_dir, 'usr/lib/os-release'), 'w') as f:
+        os.makedirs(os.path.join(chroot_includes_dir, 'etc/'), exist_ok=True)
+        with open(os.path.join(chroot_includes_dir, 'etc/os-release'), 'w') as f:
             print(os_release, file=f)
 
         ## Clean up earlier build state and artifacts
@@ -490,8 +511,9 @@ if __name__ == "__main__":
         ## Create live-build configuration files
 
         # Add the additional repositories to package lists
-        print("I: Setting up additional APT entries")
+        print("I: Setting up VyOS repository APT entries")
         vyos_repo_entry = "deb {vyos_mirror} {vyos_branch} main\n".format(**build_config)
+        vyos_repo_entry += "deb-src {vyos_mirror} {vyos_branch} main\n".format(**build_config)
 
         apt_file = defaults.VYOS_REPO_FILE
 
@@ -503,10 +525,36 @@ if __name__ == "__main__":
             f.write(vyos_repo_entry)
 
         # Add custom APT entries
+        print("I: Setting up additional APT entries")
         if build_config.get('additional_repositories', False):
-            build_config['custom_apt_entry'] += build_config['additional_repositories']
+            for r in build_config['additional_repositories']:
+                repo_data = build_config['additional_repositories'][r]
 
-        if build_config.get('custom_apt_entry', False):
+                url = repo_data.get('url', None)
+                arch = repo_data.get('architecture', None)
+                distro = repo_data.get('distribution', build_config['debian_distribution'])
+                components = repo_data.get('components', 'main')
+
+                if not url:
+                    print(f'E: repository {r} does not specify URL')
+                    sys.exit(1)
+
+                if arch:
+                    arch_string = f'[arch={arch}]'
+                else:
+                    arch_string = ''
+
+                entry = f'deb {arch_string} {url} {distro} {components}'
+                build_config['custom_apt_entry'].append(entry)
+
+                if not repo_data.get('no_source', False):
+                    src_entry = f'deb-src {url} {distro} {components}'
+                    build_config['custom_apt_entry'].append(src_entry)
+
+                if repo_data.get('key', None):
+                    build_config['custom_apt_keys'].append({'name': r, 'key': repo_data['key']})
+
+        if build_config.get('custom_apt_entry', []):
             custom_apt_file = defaults.CUSTOM_REPO_FILE
             entries = "\n".join(build_config['custom_apt_entry'])
             if debug:
@@ -517,11 +565,13 @@ if __name__ == "__main__":
                 f.write("\n")
 
         # Add custom APT keys
-        if has_nonempty_key(build_config, 'custom_apt_key'):
+        if has_nonempty_key(build_config, 'custom_apt_keys'):
             key_dir = defaults.ARCHIVES_DIR
-            for k in build_config['custom_apt_key']:
-                dst_name = '{0}.key.chroot'.format(os.path.basename(k))
-                shutil.copy(k, os.path.join(key_dir, dst_name))
+            for k in build_config['custom_apt_keys']:
+                dst_name = '{0}.key.chroot'.format(k['name'])
+                with open(os.path.join(key_dir, dst_name), 'bw') as f:
+                    key_data = base64.b64decode(k['key'])
+                    f.write(key_data)
 
         # Add custom packages
         if has_nonempty_key(build_config, 'packages'):
@@ -536,6 +586,15 @@ if __name__ == "__main__":
                 file_path = os.path.join(chroot_includes_dir, i["path"])
                 if debug:
                     print(f"D: Creating chroot include file: {file_path}")
+                os.makedirs(os.path.dirname(file_path), exist_ok=True)
+                with open(file_path, 'w') as f:
+                    f.write(i["data"])
+
+        if has_nonempty_key(build_config, "includes_binary"):
+            for i in build_config["includes_binary"]:
+                file_path = os.path.join(binary_includes_dir, i["path"])
+                if debug:
+                    print(f"D: Creating binary image include file: {file_path}")
                 os.makedirs(os.path.dirname(file_path), exist_ok=True)
                 with open(file_path, 'w') as f:
                     f.write(i["data"])
@@ -565,7 +624,7 @@ if __name__ == "__main__":
                 --checksums 'sha256 md5' \
                 --chroot-squashfs-compression-type "{{squashfs_compression_type}}" \
                 --debian-installer none \
-                --debootstrap-options "--variant=minbase --exclude=isc-dhcp-client,isc-dhcp-common,ifupdown --include=apt-utils,ca-certificates,gnupg2" \
+                --debootstrap-options "--variant=minbase --exclude=isc-dhcp-client,isc-dhcp-common,ifupdown --include=apt-utils,ca-certificates,gnupg2,linux-kbuild-6.1" \
                 --distribution {{debian_distribution}} \
                 --firmware-binary false \
                 --firmware-chroot false \
@@ -580,7 +639,8 @@ if __name__ == "__main__":
                 --mirror-chroot {{debian_mirror}} \
                 --mirror-chroot-security {{debian_security_mirror}} \
                 --security true \
-                --updates true
+                --updates true \
+                --utc-time true
                 "${@}"
         """)
 
@@ -623,24 +683,61 @@ Pin-Priority: 600
         # Copy the image
         shutil.copy("live-image-{0}.hybrid.iso".format(build_config["architecture"]), iso_file)
 
-    # Build additional flavors from the ISO,
-    # if the flavor calls for them
-    if build_config["image_format"] != ["iso"]:
-        raw_image = raw_image.create_raw_image(build_config, iso_file, "tmp/")
+        # Add the image to the manifest
+        manifest['artifacts'].append(iso_file)
 
-        if has_nonempty_key(build_config, "post_build_hook"):
-            # Some flavors require special procedures that aren't covered by qemu-img
-            # (most notably, the VMware OVA that requires a custom tool to make and sign the image).
-            # For those cases, we support running a post-build hook on the raw image.
-            # The image_format field should be 'raw' if a post-build hook is used.
-            hook_path = build_config["post_build_hook"]
-            cmd(f"{hook_path} {raw_image}")
-        else:
-            # Most other formats, thankfully, can be produced with just `qemu-img convert`
-            other_formats = filter(lambda x: x not in ["iso", "raw"], build_config["image_format"])
-            for f in other_formats:
-                image_ext = build_config.get("image_ext", f)
-                image_opts = build_config.get("image_opts", "")
-                target = f"{os.path.splitext(raw_image)[0]}.{image_ext}"
-                print(f"I: Building {f} file {target}")
-                cmd(f"qemu-img convert -f raw -O {f} {image_opts} {raw_image} {target}")
+    # If the flavor has `image_format = "iso"`, then the work is done.
+    # If not, build additional flavors from the ISO.
+    if build_config["image_format"] != ["iso"]:
+        # For all non-iso formats, we always build a raw image first
+        version_data, raw_image = raw_image.create_raw_image(build_config, iso_file, "tmp/")
+        manifest['artifacts'].append(raw_image)
+
+        # If there are other formats in the flavor, the assumptions is that
+        # they can be produced from a raw image with `qemu-img convert`
+        other_formats = filter(lambda x: x not in ["iso", "raw"], build_config["image_format"])
+        for f in other_formats:
+            image_ext = build_config.get("image_ext", f)
+            image_opts = build_config.get("image_opts", "")
+            target = f"{os.path.splitext(raw_image)[0]}.{image_ext}"
+            print(f"I: Building {f} file {target}")
+            cmd(f"qemu-img convert -f raw -O {f} {image_opts} {raw_image} {target}")
+            manifest['artifacts'].append(target)
+
+        # Finally, there are formats that require special procedures.
+        # For example, a VMware OVA needs a custom tool for image building and signing.
+        # For those cases, we support custom build hooks that run on raw images.
+        # A post-build hook is a script embedded in the flavor file
+        # that must return the artifact name via stdout.
+        if has_nonempty_key(build_config, "build_hook"):
+            hook_source = build_config["build_hook"]
+
+            with open('build_hook', 'w') as f:
+                f.write(hook_source)
+            os.chmod('build_hook', 0o755)
+
+            if has_nonempty_key(build_config, "build_hook_opts"):
+                hook_opts = build_config["build_hook_opts"]
+            else:
+                hook_opts = ""
+            build_hook_command = f"./build_hook {raw_image} {version_data['version']} \
+              {build_config['architecture']} {hook_opts}"
+            print(f'I: executing build hook command: {build_hook_command}')
+            custom_image = rc_cmd(build_hook_command)
+            manifest['artifacts'].append(custom_image)
+
+    # Filter out unwanted files from the artifact list
+    # and leave only those the user specified
+    # in either `artifact_format` or `image_format`.
+    #
+    # For example, with `image_format = "raw"`,
+    # the ISO image is just an intermediate object, not an target artifact.
+
+    # os.path.splitext returns extensions with dots,
+    # so we need to remove the dots, hence [1:]
+    is_artifact = lambda f: os.path.splitext(f)[-1][1:] in build_config['artifact_format']
+
+    manifest['artifacts'] = list(filter(is_artifact, manifest['artifacts']))
+
+    with open('manifest.json', 'w') as f:
+        f.write(json.dumps(manifest))
