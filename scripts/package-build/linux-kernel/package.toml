@@ -44,8 +44,8 @@ build_cmd = "build_intel_qat"
 
 [[packages]]
 name = "ixgbe"
-commit_id = ""
-scm_url = ""
+commit_id = "v6.0.5"
+scm_url = "https://github.com/intel/ethernet-linux-ixgbe"
 build_cmd = "build_intel_ixgbe"
 
 [[packages]]

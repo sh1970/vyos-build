@@ -18,7 +18,7 @@
 # Intel Driver source
 i40e-*/
 igb-*/
-ixgbe-*/
+ethernet-linux-ixgbe/
 ixgbevf-*/
 vyos-intel-*/
 vyos-linux-firmware*/
