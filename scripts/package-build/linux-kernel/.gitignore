@@ -18,13 +18,13 @@
 # Intel Driver source
 i40e-*/
 igb-*/
-ixgbe-*/
+ethernet-linux-ixgbe/
 ixgbevf-*/
 vyos-intel-*/
 vyos-linux-firmware*/
 kernel-vars
 r8152-*.tar.bz2
-
+ephemeral.*
 *.buildinfo
 *.build
 *.changes
