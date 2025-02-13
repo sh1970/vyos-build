@@ -24,7 +24,7 @@ vyos-intel-*/
 vyos-linux-firmware*/
 kernel-vars
 r8152-*.tar.bz2
-
+ephemeral.*
 *.buildinfo
 *.build
 *.changes
