@@ -132,7 +132,7 @@ def build_package(package: dict, dependencies: list) -> None:
         elif package['build_cmd'] == 'build_intel_qat':
             build_intel_qat()
         elif package['build_cmd'] == 'build_intel_ixgbe':
-            build_intel_ixgbe()
+            build_intel_ixgbe(package['commit_id'], package['scm_url'])
         elif package['build_cmd'] == 'build_intel_ixgbevf':
             build_intel_ixgbevf()
         elif package['build_cmd'] == 'build_mellanox_ofed':
@@ -215,8 +215,10 @@ def build_intel_qat():
     run(['./build-intel-qat.sh'], check=True)
 
 
-def build_intel_ixgbe():
+def build_intel_ixgbe(commit_id, scm_url):
     """Build Intel IXGBE"""
+    repo_dir = Path('ethernet-linux-ixgbe')
+    clone_or_update_repo(repo_dir, scm_url, commit_id)
     run(['./build-intel-ixgbe.sh'], check=True)
 
 
