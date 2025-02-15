@@ -14,6 +14,11 @@ fi
 
 . ${KERNEL_VAR_FILE}
 
+if [ -z $KERNEL_DIR ]; then
+    echo "KERNEL_DIR not defined"
+    exit 1
+fi
+
 cd ${CWD}/ethernet-linux-ixgbe
 if [ -d .git ]; then
     git clean --force -d -x
@@ -29,23 +34,16 @@ DEBIAN_DIR="${CWD}/vyos-intel-${DRIVER_NAME}_${DRIVER_VERSION}_${DEBIAN_ARCH}"
 DEBIAN_CONTROL="${DEBIAN_DIR}/DEBIAN/control"
 DEBIAN_POSTINST="${CWD}/vyos-intel-ixgbe.postinst"
 
-if [ -z $KERNEL_DIR ]; then
-    echo "KERNEL_DIR not defined"
-    exit 1
-fi
-
-# See https://lore.kernel.org/lkml/f90837d0-810e-5772-7841-28d47c44d260@intel.com/
-echo "I: remove pci_enable_pcie_error_reporting() code no longer present in Kernel"
-sed -i '/.*pci_disable_pcie_error_reporting(pdev);/d' src/ixgbe_main.c
-sed -i '/.*pci_enable_pcie_error_reporting(pdev);/d' src/ixgbe_main.c
-
 # See https://vyos.dev/T6155
-echo "I: always enable allow_unsupported_sfp for all NICs by default"
-patch -l -p1 < ../patches/ixgbe/allow_unsupported_sfp.patch
-
 # See https://vyos.dev/T6162
-echo "I: add 1000BASE-BX support"
-patch -l -p1 < ../patches/ixgbe/add_1000base-bx_support.patch
+PATCH_DIR=${CWD}/patches/ixgbe
+if [ -d $PATCH_DIR ]; then
+    for patch in $(ls ${PATCH_DIR})
+    do
+        echo "I: Apply patch: ${PATCH_DIR}/${patch}"
+        patch -p1 < ${PATCH_DIR}/${patch}
+    done
+fi
 
 echo "I: Compile Kernel module for Intel ${DRIVER_NAME} driver"
 make KSRC=${KERNEL_DIR} INSTALL_MOD_PATH=${DEBIAN_DIR} INSTALL_FW_PATH=${DEBIAN_DIR} -j $(getconf _NPROCESSORS_ONLN) -C src install
