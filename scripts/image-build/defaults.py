@@ -35,7 +35,7 @@ boot_settings: dict[str, str] = {
 # Hardcoded default values
 HARDCODED_BUILD = {
     'custom_apt_entry': [],
-    'custom_apt_key': [],
+    'custom_apt_keys': [],
     'custom_package': [],
     'reuse_iso': None,
     'disk_size': 10,

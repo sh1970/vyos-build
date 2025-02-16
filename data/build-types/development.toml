@@ -6,3 +6,73 @@ packages = [
   "vim",
   "vyos-1x-smoketest"
 ]
+
+[[includes_chroot]]
+  path = 'usr/share/vyos/EULA'
+  data = '''
+VyOS ROLLING RELEASE END USER LICENSE AGREEMENT
+
+PLEASE READ THIS AGREEMENT CAREFULLY BEFORE INSTALLING AND/OR USING VyOS ROLLING RELEASE.
+IF YOU DO NOT ACCEPT THE TERMS OF THIS AGREEMENT, THEN YOU MUST NOT USE VyOS ROLLING RELEASE.
+
+I. This End-User License Agreement (“Agreement”) is a legal document between you and VyOS Inc.
+(a company organized and existing under the laws of California,
+having its registered office at 12585 Kirkham Ct, Suite 1, Poway, California 92604)
+that governs your use of VyOS Rolling Release, available at vyos.io website.
+
+II. By downloading, installing and using VyOS Rolling Release you:
+- irrevocably agree to comply with all applicable laws, restrictions,
+  regulations, rules, the GNU GPL and other applicable licenses, and with this Agreement;
+- confirm you have all legal rights to enter into this Agreement
+  and your authority is not limited by any legal means;
+- obligate to certainly, indisputably and immediately
+  (but in any case at the first request of the VyOS Inc.)
+  compensate for any damage, if such is caused to the VyOS Inc. by your actions;
+- assure and enforce any third party you grant access to Rolling Release
+  will bear the same amount of obligations.
+  For the purpose of this Agreement such third party will be referred to also as “you”.
+
+III. VyOS Rolling Release (“Rolling Release”) are copyrighted works
+released under the terms of the GNU General Public License (GPL)
+and other licenses  approved by the Open Source Initiative (www.opensource.org),
+(hereinafter, the “Public Licenses”).
+Verbatim copies of such works may be made and distributed, by anyone,
+in accordance with the terms of the GPL and the Public Licenses.
+The GPL and the Public Licenses also grant you certain rights
+to make and distribute derivative works based on the source code to Rolling Release.
+
+You can redistribute and/or modify the Rolling Release under the terms of the GPL and the Public Licenses.
+You may obtain a copy of the source code corresponding to the binaries for the Rolling Release
+from public Git repositories as https://github.com/vyos
+
+The GPL and the Public Licenses do not grant you any right, license or interest to use “VyOS” trademarks and logos,
+that are trademarks or registered trademarks in the US, EU and other countries,
+in connection with these derivative works.
+VyOS trademarks may not be used in connection with any such derivative works
+unless that usage is explicitly and specifically permitted, in writing.
+Otherwise, You must modify the files identifiable as VyOS logos and VyOS trademarks
+so as to remove all use of images containing them.
+Note that mere deletion of these files may corrupt the Rolling Release.
+
+IV. Under no circumstances VyOS Inc. will be liable to you for any damages,
+however caused or arising in any way out of the use of
+or of inability to use the Rolling Release.
+VyOS Inc. provides no warranty for Rolling Release.
+
+V. This Agreement comes into force upon your acceptance in the form of downloading,
+installing or using Rolling Release (whatever happens first) and remains valid until termination.
+This Agreement shall terminate immediately if you violate any applicable law,
+restriction, regulation, rule, GPL or other applicable license, or any provision of this Agreement.
+Upon termination of this Agreement you shall discontinue to use Rolling Release
+and delete it as well as all copies you made from all storage devices.
+
+VI. This Agreement may be amended by VyOS Inc. at any time and brought to your attention
+by publication on vyos.io website with enter into force immediately after such publication.
+
+VII. This Agreement, and any dispute or claim arising out of or in connection with it,
+shall be governed by, and construed in accordance with the laws of California.
+The courts of California shall have exclusive jurisdiction to settle any dispute or claim.
+
+For more information or any other query please contact VyOS Inc. at: legal@vyos.io
+
+'''

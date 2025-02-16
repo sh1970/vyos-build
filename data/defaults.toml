@@ -9,12 +9,13 @@ debian_security_mirror = "http://deb.debian.org/debian-security"
 
 debian_archive_areas = "main contrib non-free non-free-firmware"
 
-vyos_mirror = "https://rolling-packages.vyos.net/current"
+vyos_mirror = "https://packages.vyos.net/repositories/current"
 
 vyos_branch = "current"
 release_train = "current"
 
-kernel_version = "6.6.35"
+kernel_version = "6.6.77"
+kernel_flavor = "vyos"
 bootloaders = "syslinux,grub-efi"
 
 squashfs_compression_type = "xz -Xbcj x86 -b 256k -always-use-fragments -no-recovery"

@@ -50,7 +50,7 @@ LABEL authors="VyOS Maintainers <maintainers@vyos.io>" \
       org.opencontainers.image.title="vyos-build" \
       org.opencontainers.image.description="Container to build VyOS ISO" \
       org.opencontainers.image.base.name="docker.io/debian/debian:bookworm"
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN /bin/echo -e 'APT::Install-Recommends "0";\nAPT::Install-Suggests "0";' > /etc/apt/apt.conf.d/01norecommends
 
@@ -60,9 +60,9 @@ RUN apt-get update && apt-get install -y \
       locales
 
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
-ENV LANG en_US.utf8
+ENV LANG=en_US.utf8
 
-ENV OCAML_VERSION 4.14.2
+ENV OCAML_VERSION=4.14.2
 
 # Base packaged needed to build packages and their package dependencies
 RUN apt-get update && apt-get install -y \
@@ -87,7 +87,8 @@ RUN apt-get update && apt-get install -y \
       gosu \
       po4a \
       openssh-client \
-      jq
+      jq \
+      socat
 
 # Packages needed for vyos-build
 RUN apt-get update && apt-get install -y \
@@ -102,6 +103,7 @@ RUN apt-get update && apt-get install -y \
       python3-flake8 \
       python3-autopep8 \
       python3-tomli \
+      python3-tomli-w \
       yq \
       debootstrap \
       live-build \
@@ -135,7 +137,7 @@ RUN dpkg-reconfigure ca-certificates; \
 # Installing OCAML needed to compile libvyosconfig
 RUN curl https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh \
       --output /tmp/opam_install.sh --retry 10 --retry-delay 5 && \
-    sed -i 's/read BINDIR/BINDIR=""/' /tmp/opam_install.sh && sh /tmp/opam_install.sh && \
+    sed -i 's/read_tty BINDIR/BINDIR=""/' /tmp/opam_install.sh && sh /tmp/opam_install.sh && \
     opam init --root=/opt/opam --comp=${OCAML_VERSION} --disable-sandboxing --no-setup
 
 RUN eval $(opam env --root=/opt/opam --set-root) && \
@@ -151,10 +153,6 @@ RUN eval $(opam env --root=/opt/opam --set-root) && opam install -y \
       fileutils \
       xml-light
 
-# Build VyConf which is required to build libvyosconfig
-RUN eval $(opam env --root=/opt/opam --set-root) && \
-    opam pin add vyos1x-config https://github.com/vyos/vyos1x-config.git#fc327ecd76 -y
-
 # Packages needed for libvyosconfig
 RUN apt-get update && apt-get install -y \
       quilt \
@@ -164,7 +162,7 @@ RUN apt-get update && apt-get install -y \
 # Build libvyosconfig
 RUN eval $(opam env --root=/opt/opam --set-root) && \
     git clone https://github.com/vyos/libvyosconfig.git /tmp/libvyosconfig && \
-    cd /tmp/libvyosconfig && git checkout c6141d97 && \
+    cd /tmp/libvyosconfig && git checkout 677d1e2bf8109b9fd4da60e20376f992b747e384 && \
     dpkg-buildpackage -uc -us -tc -b && \
     dpkg -i /tmp/libvyosconfig0_*_$(dpkg-architecture -qDEB_HOST_ARCH).deb
 
@@ -177,6 +175,18 @@ RUN wget -O /tmp/open-vmdk-master.zip https://github.com/vmware/open-vmdk/archiv
     unzip -d /tmp/ /tmp/open-vmdk-master.zip && \
     cd /tmp/open-vmdk-master/ && make && make install
 
+# Packages need for build live-build
+RUN apt-get update && apt-get install -y \
+      cpio
+
+COPY patches/live-build/0001-save-package-info.patch /tmp/0001-save-package-info.patch
+
+RUN git clone https://salsa.debian.org/live-team/live-build.git /tmp/live-build && \
+    cd /tmp/live-build && git checkout debian/1%20240810 && \
+    patch -p1 < /tmp/0001-save-package-info.patch && \
+    dch -n "Applying fix for save package info" && \
+    dpkg-buildpackage -us -uc && \
+    dpkg -i ../live-build*.deb
 #
 # live-build: building in docker fails with mounting /proc | /sys
 #
@@ -194,7 +204,6 @@ RUN wget https://salsa.debian.org/klausenbusk-guest/debootstrap/commit/a9a603b17
     sudo dpkg -i ../debootstrap*.deb
 
 # Packages needed for Linux Kernel
-# gnupg2 is required by Jenkins for the TAR verification
 # cmake required by accel-ppp
 RUN apt-get update && apt-get install -y \
       cmake \
@@ -257,17 +266,12 @@ RUN pip install --break-system-packages \
       quilt \
       whois
 
-# Go required for validators and vyos-xe-guest-utilities
-RUN GO_VERSION_INSTALL="1.21.3" ; \
+# Go required for telegraf and prometheus exporters build
+RUN GO_VERSION_INSTALL="1.23.2" ; \
     wget -O /tmp/go${GO_VERSION_INSTALL}.linux-amd64.tar.gz https://go.dev/dl/go${GO_VERSION_INSTALL}.linux-$(dpkg-architecture -qDEB_HOST_ARCH).tar.gz ; \
     tar -C /opt -xzf /tmp/go*.tar.gz && \
     rm /tmp/go*.tar.gz
 RUN echo "export PATH=/opt/go/bin:$PATH" >> /etc/bash.bashrc
-
-# Packages needed for opennhrp
-RUN apt-get update && apt-get install -y \
-      libc-ares-dev \
-      libev-dev
 
 # Packages needed for Qemu test-suite
 # This is for now only supported on i386 and amd64 platforms
@@ -371,6 +375,11 @@ RUN sed "s/^%sudo.*/%sudo\tALL=(ALL) NOPASSWD:ALL/g" -i /etc/sudoers && \
 # Ensure sure all users have access to our OCAM and Go installation
 RUN echo "$(opam env --root=/opt/opam --set-root)" >> /etc/skel/.bashrc && \
     echo "export PATH=/opt/go/bin:\$PATH" >> /etc/skel/.bashrc
+
+# Rise upper limit for UID when working in an Active Direcotry integrated
+# environment. This solves the warning: vyos_bld's uid 1632000007 outside of the
+# UID_MIN 1000 and UID_MAX 60000 range.
+RUN sed -i 's/UID_MAX\t\t\t60000/UID_MAX\t\t\t2000000000/g' /etc/login.defs
 
 # Cleanup
 RUN rm -rf /tmp/*

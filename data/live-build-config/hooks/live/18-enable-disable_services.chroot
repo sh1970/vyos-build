@@ -1,6 +1,7 @@
 #!/bin/sh
 
 echo I: Disabling services
+systemctl disable rsyslog.service
 systemctl disable arpwatch.service
 systemctl disable smartd.service
 systemctl disable kea-ctrl-agent.service
@@ -62,15 +63,14 @@ systemctl disable dnsdist.service
 systemctl disable haproxy.service
 systemctl disable owamp-server.service
 systemctl disable twamp-server.service
-systemctl disable podman-auto-update.service
-systemctl disable podman-auto-update.timer
-systemctl disable podman-restart.service
 systemctl disable vyos-wan-load-balance.service
 systemctl disable nvmf-autoconnect.service
 systemctl disable dpkg-db-backup.timer
 systemctl disable dpkg-db-backup.service
 systemctl disable zabbix-agent2.service
 systemctl disable suricata.service
+systemctl disable vyconfd.service
+systemctl disable vpp.service
 
 echo I: Enabling services
 systemctl enable vyos-hostsd.service

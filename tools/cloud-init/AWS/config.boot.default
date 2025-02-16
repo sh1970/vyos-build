@@ -10,7 +10,7 @@ system {
         }
     }
     syslog {
-        global {
+        local {
             facility all {
                 level info
             }
